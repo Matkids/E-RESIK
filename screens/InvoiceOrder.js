@@ -1,31 +1,35 @@
 import React from 'react';
-import {
- Container,
- Header,
- Content,
- Button,
- Text,
-} from 'native-base';
+import { Header } from '../components';
+import { Box, Text, Button, HStack, VStack, Spacer, Divider } from 'native-base';
 
-const InvoiceOrder = ({ order }) => {
- return (
-    <Container>
-      <Header />
-      <Content>
-        <Text>Invoice:</Text>
-        <Text>Nama: {order.nama}</Text>
-        <Text>No HP: {order.noHp}</Text>
-        <Text>Alamat: {order.alamat}</Text>
-        <Text>Jenis Layanan: {order.jenisLayanan}</Text>
-        <Text>Tanggal Pesanan: {order.tanggalPesanan}</Text>
-        <Text>Berat: {order.berat} kg</Text>
-        <Text>Total Harga: Rp{order.berat * 10000}</Text>
-        <Button full>
-          <Text>Cetak Invoice</Text>
-        </Button>
-      </Content>
-    </Container>
- );
+const Invoice = ({ nama, noHp, alamat, jenisLayanan, tanggalPesanan, berat, harga, onCancel }) => {
+  return (
+    <Box flex={1} bg="white">
+      <Header title="Invoice" />
+      <VStack space={4} p={4} flex={1}>
+        <Text fontSize="xl" fontWeight="bold">Invoice Details</Text>
+        <Divider />
+        <VStack space={2}>
+          <Text>Nama: {nama}</Text>
+          <Text>No HP: {noHp}</Text>
+          <Text>Alamat: {alamat}</Text>
+          <Text>Jenis Layanan: {jenisLayanan}</Text>
+          <Text>Tanggal Pesanan: {tanggalPesanan}</Text>
+          <Text>Berat (kg): {berat}</Text>
+          <Text>Harga: {harga}</Text>
+        </VStack>
+        <Spacer />
+        <HStack justifyContent="space-between">
+          <Button onPress={onCancel} colorScheme="danger" size="lg" flex={1}>
+            Kembali
+          </Button>
+          <Button colorScheme="teal" size="lg" flex={1}>
+            Bayar
+          </Button>
+        </HStack>
+      </VStack>
+    </Box>
+  );
 };
 
-export default InvoiceOrder;
+export default Invoice;

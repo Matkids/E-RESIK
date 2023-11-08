@@ -1,7 +1,13 @@
-import { Box,AspectRatio,Image,Center,Stack,Heading,Text,HStack } from "native-base";
-import { Header } from "../components";
+import { Box,AspectRatio,Image,Center,Stack,Heading,Text,HStack,Button } from "native-base";
+import ConfirmationOrder from "./ConfirmationOrder";
+import { useNavigation } from "@react-navigation/native";
+import { Ionicons } from '@expo/vector-icons';
+import { Header } from '../components';
 
-const ProfileScreen = () => {
+
+const ProfileUser = () => {
+  const navigation = useNavigation();
+
   return ( 
     <>
       <Box alignItems="center" >
@@ -62,8 +68,14 @@ const ProfileScreen = () => {
         </Stack>
       </Box>
     </Box>
+          <Text>
+            <Box alignItems="center" py="10" px="160">
+              <Button 
+              onPress={() => navigation.goBack ('')}>KEMBALI</Button>
+            </Box>
+          </Text>
     </>
   );
 };
 
-export default ProfileScreen
+export default ProfileUser

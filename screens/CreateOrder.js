@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Header } from '../components';
-import { Button, Box, Stack, Text, Divider, TextArea, Input, Icon } from "native-base";
+import { Button, Box, Stack, Text, Divider, TextArea, Input, Icon, Center} from "native-base";
 import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 
@@ -19,6 +19,9 @@ const CreateOrder = () => {
 
     return (
         <Box>
+            <Header title={"BUAT PESANAN"} />
+      <Center flex={1}>
+      </Center>
             <Stack space={4} w="90%" mx="auto">
                 <Input
                     placeholder="Nama"

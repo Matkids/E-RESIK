@@ -1,5 +1,5 @@
 import React, { useEffect, useState, } from "react";
-import { Text, HStack, Button, Icon, KeyboardAvoidingView, Input, Heading, VStack, } from "native-base";
+import { Text, HStack, Button, Icon, KeyboardAvoidingView, Input, Heading, VStack, Center } from "native-base";
 import ModalSignUp from "../components/ModalSignUp.js"
 import { Ionicons } from '@expo/vector-icons';
 import Companylogo from "../components/Companylogo.js";
@@ -25,11 +25,6 @@ export default function LoginScreen() {
 
     const email = emailInput;
     const password = passwordInput;
-
-    useEffect(() => {
-        // Handle your Authentication here
-    }, [])
-
     return (
         <KeyboardAvoidingView flex={5} justifyContent= {'center'} alignItems= {'stretch'}>
             <VStack space={5} alignItems="center">
@@ -69,7 +64,7 @@ export default function LoginScreen() {
                     maxWidth="300px"
                     colorScheme="primary"
                     onPress={() => 
-                        navigation.navigate('ProfilScreen')
+                        navigation.navigate('ProfileUser')
                     }
                 >
                     Login
@@ -84,11 +79,3 @@ export default function LoginScreen() {
         </KeyboardAvoidingView>
     );
 }
-
-// const styles = StyleSheet.create({
-//     container: {
-//         flex: 5,
-//         justifyContent: 'center',
-//         alignItems: 'stretch'
-//     }
-// })

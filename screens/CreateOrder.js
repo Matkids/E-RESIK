@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Header } from '../components';
-import { Button, Box, Stack, Text, Divider, TextArea, Input, Icon } from "native-base";
+import { Button, Box, Stack, Text, Divider, TextArea, Input, Icon, Image } from "native-base";
 import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
+
+import logo from '../assets/icon.png';
 
 const CreateOrder = () => {
     const [nama, setNama] = useState("");
@@ -19,6 +21,15 @@ const CreateOrder = () => {
 
     return (
         <Box>
+            <Header title={"Buat Pesanan"}>
+                <Image
+                    source={logo}
+                    alt="Logo"
+                    size={8}
+                    mx="auto"
+                />
+            </Header>
+
             <Stack space={4} w="90%" mx="auto">
                 <Input
                     placeholder="Nama"
@@ -62,7 +73,8 @@ const CreateOrder = () => {
                             navigation.navigate('Confirmation')
                         }
                     >
-                        Submit Pesanan</Button>
+                        Buat Pesanan
+                    </Button>
                 </Box>
             </Stack>
         </Box>

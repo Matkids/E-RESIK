@@ -11,12 +11,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import Profile from "./screens/Profile";
+import Profile from "./screens/Profile"
 import Home from "./screens/Home"
 import LoginScreen from "./screens/LoginScreen";
 import CreateOrder from "./screens/CreateOrder";
 import ConfirmationOrder from "./screens/ConfirmationOrder";
-import Invoice from "./screens/InvoiceOrder";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -98,10 +97,8 @@ return (
     <Stack.Navigator>
       <Stack.Screen name="Home" component={Tabs} options={noHead} />
       <Stack.Screen name="LoginScreen" component={Tabs} options={noHead} />
-      <Stack.Screen name="ProfileScreen" component={Tabs} options={noHead} />
       <Stack.Screen name="CreateOrder" component={Tabs} options={noHead} />
       <Stack.Screen name="Confirmation" component={ConfirmationOrder} options={noHead} />
-      <Stack.Screen name="Invoice" component={Invoice} options={noHead} />
     </Stack.Navigator>
   </NavigationContainer>
   </NativeBaseProvider>

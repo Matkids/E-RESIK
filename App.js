@@ -16,6 +16,9 @@ import Home from "./screens/Home"
 import LoginScreen from "./screens/LoginScreen";
 import CreateOrder from "./screens/CreateOrder";
 import ConfirmationOrder from "./screens/ConfirmationOrder";
+import ListCustomer  from "./screens/ListCustomer";
+import CreateCustomer from "./screens/CreateCustomer";
+import Customer from "./screens/Customer";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -76,7 +79,7 @@ const Tabs = () => {
       <Tab.Screen name="List" component={Home} options={noHead} />
       <Tab.Screen name="Order" component={CreateOrder} options={noHead} />
       <Tab.Screen name="History" component={Home} options={noHead} />
-      <Tab.Screen name="Login" component={Home} options={noHead} />
+      <Tab.Screen name="Customer" component={Customer} options={noHead} />
       <Tab.Screen name="Profile" component={LoginScreen} options={noHead} />
     </Tab.Navigator>
   );
@@ -100,6 +103,9 @@ return (
       <Stack.Screen name="ProfileScreen" component={Tabs} options={noHead} />
       <Stack.Screen name="CreateOrder" component={Tabs} options={noHead} />
       <Stack.Screen name="Confirmation" component={ConfirmationOrder} options={noHead} />
+      <Stack.Screen name="ListCustomer" component={ListCustomer} options={noHead} />
+      <Stack.Screen name="CreateCustomer" component={CreateCustomer} options={noHead} />
+      <Stack.Screen name="Customer" component={Customer} options={noHead} />
     </Stack.Navigator>
   </NavigationContainer>
   </NativeBaseProvider>

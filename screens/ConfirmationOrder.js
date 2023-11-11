@@ -1,66 +1,82 @@
 import React from "react";
-import { Header } from "../components";
-import { Button, Box, Stack, Text, Divider, HStack, VStack, Heading } from "native-base";
+import { Button, Box, Stack, Text, Divider, HStack, Icon, Heading } from "native-base";
 import { useNavigation } from "@react-navigation/native";
+import { Ionicons } from "@expo/vector-icons";
+import { Header } from "../components";
+import { SafeAreaView } from "react-native";
 
-const ConfirmationOrder = ({ route }) => {
+const ConfirmationOrder = () => {
   const navigation = useNavigation();
-  const { nama, noHp, alamat, jenisLayanan, tanggalPesanan, berat, keterangan } =
-    route.params;
 
   return (
     <Box>
-      <Header title="Konfirmasi Pesanan" />
-      <Stack space={4} w="90%" mx="auto">
-        <VStack space={2}>
-          <HStack justifyContent="space-between">
-            <Text fontWeight="bold">Nama:</Text>
-            <Text>{nama}</Text>
-          </HStack>
-          <HStack justifyContent="space-between">
-            <Text fontWeight="bold">Nomor HP:</Text>
-            <Text>{noHp}</Text>
-          </HStack>
-          <HStack justifyContent="space-between">
-            <Text fontWeight="bold">Alamat:</Text>
-            <Text>{alamat}</Text>
-          </HStack>
-          <HStack justifyContent="space-between">
-            <Text fontWeight="bold">Jenis Layanan:</Text>
-            <Text>{jenisLayanan}</Text>
-          </HStack>
-          <HStack justifyContent="space-between">
-            <Text fontWeight="bold">Tanggal Pesanan:</Text>
-            <Text>{tanggalPesanan}</Text>
-          </HStack>
-          <HStack justifyContent="space-between">
-            <Text fontWeight="bold">Berat (kg):</Text>
-            <Text>{berat}</Text>
-          </HStack>
-          <HStack justifyContent="space-between">
-            <Text fontWeight="bold">Keterangan:</Text>
-            <Text>{keterangan}</Text>
-          </HStack>
-        </VStack>
-        <Divider />
-        <Box flexDirection="row" justifyContent="space-between" alignItems="center">
-          <Heading size="md" fontWeight="bold">
-            Harga:
-          </Heading>
-          <Text fontWeight="bold">Rp35.000</Text>
-        </Box>
-        <Box flexDirection="row" justifyContent="space-around">
-          <Button
-            colorScheme="danger"
+      <Box
+        p={2}
+        shadow={2}
+        borderRadius="md"
+        margin={10}
+        mb={3}
+        ml={3}
+        mr={3}
+        mt={3}
+      >
+        <HStack space={2} alignItems="center" mt={3} shadow={1}>
+          <Icon
+            margin={5}
+            as={<Ionicons name="arrow-back" />}
             onPress={() => navigation.navigate("Home")}
-          >
-            Batal
-          </Button>
-          <Button onPress={() => navigation.navigate("Invoice")}>
-            Konfirmasi
-          </Button>
-        </Box>
-      </Stack>
+          />
+          <Heading fontSize="lg" fontWeight="bold">
+            Ayo cek pesananmu!
+          </Heading>
+        </HStack>
+        <Stack space={4} w="90%" mx="auto" mt={4}>
+          <HStack alignItems="center">
+            <Icon as={<Ionicons name="person" />} />
+            <Text bold> Nama</Text>
+          </HStack>
+          <Text>Muhammad Zhahnur Arif</Text>
+          <HStack alignItems="center">
+            <Icon as={<Ionicons name="call" />} />
+            <Text bold> Nomor HP</Text>
+          </HStack>
+          <Text>082140715463</Text>
+          <HStack alignItems="center">
+            <Icon as={<Ionicons name="home" />} />
+            <Text bold> Alamat</Text>
+          </HStack>
+          <Text>Sidoarjo - Jawa Timur</Text>
+          <Divider my={4} />
+          <HStack alignItems="center">
+            <Icon as={<Ionicons name="list" />} />
+            <Text bold> Jenis Layanan</Text>
+          </HStack>
+          <Text>Cuci Setrika</Text>
+          <HStack alignItems="center">
+            <Icon as={<Ionicons name="calendar" />} />
+            <Text bold> Tanggal Pesanan</Text>
+          </HStack>
+          <Text>15 November 2023</Text>
+          <HStack alignItems="center">
+            <Icon as={<Ionicons name="barbell" />} />
+            <Text bold> Berat</Text>
+          </HStack>
+          <Text>10 kg</Text>
+          <HStack alignItems="center">
+            <Icon as={<Ionicons name="information-circle" />} />
+            <Text bold> Keterangan</Text>
+          </HStack>
+          <Text mb={3}>Baju Batik, Baju Sekolah, Baju Pramuka</Text>
+        </Stack>
+      </Box>
+      <Box bg="white" p={2}>
+        <Text fontSize="lg" fontWeight="bold" textAlign="center">
+          Harga: Rp35.000
+        </Text>
+        <Button onPress={() => navigation.navigate("Invoice")} mt={2} mr={10} ml={10}>
+          Konfirmasi Pesanan
+        </Button>
+      </Box>
     </Box>
   );
 };

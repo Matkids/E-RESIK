@@ -8,7 +8,7 @@ const Companylogo = () => {
     <Box>
       <Image
         size="xl"
-        source={require('../assets/dewa.png')}
+        source={require('../assets/icon.png')}
         />
     </Box>
     );

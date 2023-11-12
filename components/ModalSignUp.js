@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { Button, Modal, Icon, Input, Heading, VStack, } from "native-base";
 import { Ionicons } from '@expo/vector-icons';
 
+
 export default function ModalSignUp(props) {
 
     const { showModal, setShowModal } = props
-
     const handleClickToggleFirstPw = () => setShowFirstPw(!showFirstPw);
     const handlEmailChange = text => setEmail(text);
     const handlPWChange = text => setPassword(text);
+
 
     const [showFirstPw, setShowFirstPw] = useState(false);
     const [emailInput, setEmail] = useState('');
@@ -38,6 +39,34 @@ export default function ModalSignUp(props) {
                             mx="3"
                             placeholder="E-Mail"
                         />
+                        <Input value={emailInput} onChangeText={handlEmailChange} InputLeftElement={
+                            <Icon as={Ionicons} name="body-outline" size="sm" ml="2" />
+                        }
+                            variant="outline"
+                            mx="3"
+                            placeholder="Nama"
+                        />
+                        <Input value={emailInput} onChangeText={handlEmailChange} InputLeftElement={
+                            <Icon as={Ionicons} name="happy-outline" size="sm" ml="2" />
+                        }
+                            variant="outline"
+                            mx="3"
+                            placeholder="Umur"
+                        />
+                        <Input value={emailInput} onChangeText={handlEmailChange} InputLeftElement={
+                            <Icon as={Ionicons} name="home-outline" size="sm" ml="2" />
+                        }
+                            variant="outline"
+                            mx="3"
+                            placeholder="Alamat"
+                        />
+                        <Input value={emailInput} onChangeText={handlEmailChange} InputLeftElement={
+                            <Icon as={Ionicons} name="bag-outline" size="sm" ml="2" />
+                        }
+                            variant="outline"
+                            mx="3"
+                            placeholder="Kode Pos"
+                        />
                         <Input value={passwordInput} onChangeText={handlPWChange} InputLeftElement={
                             <Icon as={Ionicons} name="key-outline" size="sm" ml="2" />
                         }
@@ -59,11 +88,6 @@ export default function ModalSignUp(props) {
                             mt="2"
                             colorScheme="primary"
                             onPress={() => {
-                                if (passwordInput === passwordScndInput) {
-                                    // handle signup here
-                                } else {
-                                    // handle error here
-                                }
                             }}>
                             Sign up
                         </Button>

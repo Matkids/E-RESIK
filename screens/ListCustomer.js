@@ -1,4 +1,4 @@
-import { Box, Center, Heading, Text, Stack, ScrollView, Button, Modal, VStack, HStack } from "native-base";
+import { Box, Center, Heading, Text, Stack, ScrollView, Button, Modal, VStack, HStack, TouchableOpacity } from "native-base";
 import { Header } from "../components";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from "@react-navigation/native";
@@ -14,12 +14,12 @@ const ListCustomer = () => {
         <>
             <Header title={"Customer"} />
             <Center flex="1" bg="#9BBEC8">
-            <Heading h="50" w="full" bg="muted.100" bold size="lg" color="primary.800" >
-                -----------List Customer------------
+            <Heading bg="primary.800" h="50" w="full" CC bold size="lg" color="muted.100" style={{ textAlign: 'center', textAlignVertical: 'center'}}>
+                List Customer
             </Heading>
                 <ScrollView>
                     <SafeAreaView>
-                        <Box mt="5" w="80" rounded="lg" bg="muted.100" borderColor="primary.800" borderWidth="2">
+                        <Box  w="80" rounded="lg" bg="muted.100" borderColor="primary.800" borderWidth="2">
                             {/* Customer 1 */}
                             <Stack p="4" space={3}>
                                 <Stack space={2}>
@@ -32,7 +32,7 @@ const ListCustomer = () => {
                                         Customer 1
                                     </Text>
                                 </Stack>
-                                <Text onPress={() => setShowModal(true)} fontWeight="400">
+                                <Text  onPress={() => setShowModal(true)} fontWeight="400">
                                     Klik untuk detail customer.
                                 </Text>
                             </Stack>
@@ -163,7 +163,7 @@ const ListCustomer = () => {
                         </Box>
 
                         {/* BUTTON BELUM SELESAI */}
-                        <Button md="5" mt={5} onPress={() =>
+                        <Button bg="primary.800" md="5" mt={5} onPress={() =>
                             navigation.navigate('CreateCustomer')}>Create Customer</Button>
                     </SafeAreaView>
                 </ScrollView>

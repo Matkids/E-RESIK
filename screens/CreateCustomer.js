@@ -16,7 +16,7 @@ const CreateCustomer = () => {
       <Center flex={1} bg="#9BBEC8">
       <SafeAreaView> 
       <ScrollView> 
-        <Box mt="70" p="10" bg="muted.100" w="80" maxWidth="350px" borderColor="primary.800" borderWidth="5" rounded="lg" >
+        <Box mt="50" p="10" bg="muted.100" w="80" maxWidth="350px" borderColor="primary.800" borderWidth="5" rounded="lg" >
           <FormControl isRequired >
             <Text bold fontSize="xl" color="primary.800" mb="4">
               Create Customer
@@ -49,7 +49,7 @@ const CreateCustomer = () => {
             <Input variant="rounded" type="number" placeholder="+62" />
 
             {/* BUTTON BELUM SELESAI */}
-            <Button mt={5} onPress={() =>
+            <Button bg="primary.800" mt={5} onPress={() =>
               navigation.navigate('ListCustomer')}> Submit</Button>
           </FormControl>
         </Box>

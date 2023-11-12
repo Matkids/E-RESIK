@@ -10,6 +10,7 @@ import {
   FormControl,
   Modal,
   Input,
+  Heading,
 } from "native-base";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -38,17 +39,17 @@ const Riwayat = () => {
           <VStack>
             <Box bg={"#1a91ff"} rounded="10" pt={2} pb={2} pl={4} my={4}>
               <HStack justifyContent={"space-between"}>
-                <Text bold py={2} fontSize="xl" color={"#FFF"}>
+              <Text bold py={2} fontSize="xl" color={"#FFF"}>
                   Laundry
                 </Text>
 
                 <Button
-                  mx={2}
-                  my={2}
-                  ml={20}
-                  mr={2}
+                   mx={2}
+                   my={2}
+                   ml={20}
+                   mr={2} 
                   rounded={10}
-                  bg={"#FFF"}
+                  bg={"#FFFf"}
                   onPress={() => setShowModal(true)}
                 >
                   <Text color={"#1a91ff"}>Hapus</Text>
@@ -56,17 +57,8 @@ const Riwayat = () => {
                 <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
                   <Modal.Content maxWidth="400px">
                     <Modal.CloseButton />
-                    <Modal.Header >Hapus Riwayat</Modal.Header>
-                    <Modal.Body>
-                      <FormControl>
-                        <FormControl.Label>Name</FormControl.Label>
-                        <Input />
-                      </FormControl>
-                      <FormControl mt="3">
-                        <FormControl.Label>Email</FormControl.Label>
-                        <Input />
-                      </FormControl>
-                    </Modal.Body>
+                    <Modal.Header>Hapus Riwayat</Modal.Header>
+             
                     <Modal.Footer>
                       <Button.Group space={2}>
                         <Button
@@ -76,14 +68,14 @@ const Riwayat = () => {
                             setShowModal(false);
                           }}
                         >
-                          Cancel
+                          Batal
                         </Button>
-                        <Button
+                        <Button bg={"#1a91ff"}
                           onPress={() => {
                             setShowModal(false);
                           }}
                         >
-                          Save
+                         <Text color={"#FFFF"}>Hapus</Text>
                         </Button>
                       </Button.Group>
                     </Modal.Footer>
@@ -138,9 +130,50 @@ const Riwayat = () => {
             </Box>
 
             <Box bg={"#1a91ff"} rounded="10" pt={2} pr={4} pb={2} pl={4}>
+            <HStack justifyContent={"space-between"}>
               <Text bold py={2} fontSize="xl" color={"#FFF"}>
-                Laundry
-              </Text>
+                  Laundry
+                </Text>
+
+                <Button
+                   mx={2}
+                   my={2}
+                   ml={24}
+                   mr={2} 
+                  rounded={10}
+                  bg={"#FFFf"}
+                  onPress={() => setShowModal(true)}
+                >
+                  <Text color={"#1a91ff"}>Hapus</Text>
+                </Button>
+                <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+                  <Modal.Content maxWidth="400px">
+                    <Modal.CloseButton />
+                    <Modal.Header>Hapus Riwayat</Modal.Header>
+             
+                    <Modal.Footer>
+                      <Button.Group space={2}>
+                        <Button
+                          variant="ghost"
+                          colorScheme="blueGray"
+                          onPress={() => {
+                            setShowModal(false);
+                          }}
+                        >
+                          Batal
+                        </Button>
+                        <Button bg={"#1a91ff"}
+                          onPress={() => {
+                            setShowModal(false);
+                          }}
+                        >
+                          <Text color={"#FFF"}>Hapus</Text>
+                        </Button>
+                      </Button.Group>
+                    </Modal.Footer>
+                  </Modal.Content>
+                </Modal>
+              </HStack>
               <Divider />
               <HStack pt={2}>
                 <Image
@@ -189,9 +222,50 @@ const Riwayat = () => {
             </Box>
 
             <Box bg={"#1a91ff"} rounded="10" pt={2} pr={4} pb={2} pl={4} mt={4}>
+            <HStack justifyContent={"space-between"}>
               <Text bold py={2} fontSize="xl" color={"#FFF"}>
-                Laundry
-              </Text>
+                  Laundry
+                </Text>
+
+                <Button
+                   mx={2}
+                   my={2}
+                   ml={24}
+                   mr={2} 
+                  rounded={10}
+                  bg={"#FFFf"}
+                  onPress={() => setShowModal(true)}
+                >
+                  <Text color={"#1a91ff"}>Hapus</Text>
+                </Button>
+                <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+                  <Modal.Content maxWidth="400px">
+                    <Modal.CloseButton />
+                    <Modal.Header>Hapus Riwayat</Modal.Header>
+             
+                    <Modal.Footer>
+                      <Button.Group space={2}>
+                        <Button
+                          variant="ghost"
+                          colorScheme="blueGray"
+                          onPress={() => {
+                            setShowModal(false);
+                          }}
+                        >
+                          Batal
+                        </Button>
+                        <Button bg={"#1a91ff"}
+                          onPress={() => {
+                            setShowModal(false);
+                          }}
+                        >
+                          <Text color={"#FFF"}>Hapus</Text>
+                        </Button>
+                      </Button.Group>
+                    </Modal.Footer>
+                  </Modal.Content>
+                </Modal>
+              </HStack>
               <Divider />
               <HStack pt={2}>
                 <Image
@@ -240,9 +314,51 @@ const Riwayat = () => {
             </Box>
 
             <Box bg={"#1a91ff"} rounded="10" pt={2} pr={4} pb={2} pl={4} mt={4}>
+            <HStack justifyContent={"space-between"}>
               <Text bold py={2} fontSize="xl" color={"#FFF"}>
-                Laundry
-              </Text>
+                  Laundry
+                </Text>
+
+                <Button
+                   mx={2}
+                   my={2}
+                   ml={24}
+                   mr={2} 
+                  rounded={10}
+                  bg={"#FFFf"}
+                  onPress={() => setShowModal(true)}
+                >
+                  <Text color={"#1a91ff"}>Hapus</Text>
+                </Button>
+                <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+                  <Modal.Content maxWidth="400px">
+                    <Modal.CloseButton />
+                    <Modal.Header>Hapus Riwayat</Modal.Header>
+             
+                    <Modal.Footer>
+                      <Button.Group space={2}>
+                        <Button
+                          variant="ghost"
+                          colorScheme="blueGray"
+                          onPress={() => {
+                            setShowModal(false);
+                          }}
+                        >
+                          Batal
+                        </Button>
+                        <Button bg={"#1a91ff"}
+                          onPress={() => {
+                            setShowModal(false);
+                          }}
+                        >
+                          <Text color={"#FFF"}>Hapus</Text>
+                        </Button>
+                      </Button.Group>
+                    </Modal.Footer>
+                  </Modal.Content>
+                </Modal>
+              </HStack>
+
               <Divider />
               <HStack pt={2}>
                 <Image

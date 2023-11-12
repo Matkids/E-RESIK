@@ -10,6 +10,9 @@ import LoginScreen from "./screens/LoginScreen";
 import CreateOrder from "./screens/CreateOrder";
 import ConfirmationOrder from "./screens/ConfirmationOrder";
 import Invoice from "./screens/Invoice";
+import ListPendapatan from "./screens/ListPendapatan";
+import DetailPendapatan from "./screens/DetailPendapatan";
+import TambahPendapatan from "./screens/TambahPendapatan";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -26,11 +29,14 @@ const Tabs = () => {
             case "Beranda":
               iconName = "home-outline";
               break;
-            case "Pelanggan":
+            case "Kostumer":
               iconName = "people-outline";
               break;
             case "Order":
               iconName = "cart-outline";
+              break;
+            case "List":
+              iconName = "cash-outline";
               break;
             case "Riwayat":
               iconName = "time-outline";
@@ -38,6 +44,7 @@ const Tabs = () => {
             case "Profile":
               iconName = "person-circle-outline";
               break;
+
           }
           return (
             <Ionicons
@@ -62,8 +69,9 @@ const Tabs = () => {
       })}
     >
       <Tab.Screen name="Beranda" component={Home} options={noHead} />
-      <Tab.Screen name="Pelanggan" component={Home} options={noHead} />
+      <Tab.Screen name="Kostumer" component={Home} options={noHead} />
       <Tab.Screen name="Order" component={CreateOrder} options={noHead} />
+      <Tab.Screen name="List" component={ListPendapatan} options={noHead} />
       <Tab.Screen name="Riwayat" component={Home} options={noHead} />
       <Tab.Screen name="Profile" component={Profile} options={noHead} />
     </Tab.Navigator>
@@ -80,6 +88,9 @@ const App = () => {
           <Stack.Screen name="CreateOrder" component={CreateOrder} options={noHead} />
           <Stack.Screen name="Confirmation" component={ConfirmationOrder} options={noHead} />
           <Stack.Screen name="Invoice" component={Invoice} options={noHead} />
+          <Stack.Screen name="ListPendapatan" component={Tabs} options={noHead} />
+          <Stack.Screen name="DetailPendapatan" component={DetailPendapatan}/>
+          <Stack.Screen name="TambahPendapatan" component={TambahPendapatan}/>
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>

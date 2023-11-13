@@ -22,7 +22,7 @@ const ConfirmationOrder = () => {
           <Icon
             margin={5}
             as={<Ionicons name="arrow-back" />}
-            onPress={() => navigation.navigate("Home")}
+            onPress={() => navigation.goBack('')}
           />
           <Heading fontSize="lg" fontWeight="bold">
             Ayo cek pesananmu!

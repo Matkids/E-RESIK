@@ -14,13 +14,9 @@ export default function LoginScreen() {
     const navigation = useNavigation();
     
 
-    // Show Password Value Uncensored    
+
     const handleClick = () => setShow(!show);
-
-    // Track Email input
     const handleEmailChange = text => setEmail(text);
-
-    // Track Password input
     const handlePWChange = text => setPassword(text);
 
     const email = emailInput;
@@ -64,7 +60,7 @@ export default function LoginScreen() {
                     maxWidth="300px"
                     colorScheme="primary"
                     onPress={() => 
-                        navigation.navigate('ProfileUser')
+                        navigation.navigate('Home')
                     }
                 >
                     Login

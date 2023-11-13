@@ -1,3 +1,4 @@
+
 import { Box, Stack, Heading, HStack, Text, ScrollView, Image, Center} from 'native-base';
 import { SafeAreaView, TouchableOpacity } from 'react-native';
 import { useNavigation } from "@react-navigation/native";

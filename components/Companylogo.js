@@ -7,8 +7,8 @@ const Companylogo = () => {
     return (
     <Box>
       <Image
-        size="xl"  borderRadius={100}
-        source={require('../assets/Eresik.png')}
+        size="xl"
+        source={require('../assets/icon.png')}
         />
     </Box>
     );

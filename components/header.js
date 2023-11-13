@@ -12,7 +12,7 @@ const Header = ({}) => {
           <HStack alignItems="center">
             <>
               <Image
-                source={require("../assets/logos.png")}
+                source={require("../assets/icon.png")}
                 w="20"
                 h="12"
                 alt="laundry Logo"
@@ -23,7 +23,7 @@ const Header = ({}) => {
               <Text bold fontSize="xl">
                 Hi! Welcome
               </Text>
-              <Text fontSize="md">Farrel Ardan</Text>
+              <Text fontSize="md">Arif Rahmat Farrel Anggi Risa</Text>
             </VStack>
           </HStack>
           <HStack>

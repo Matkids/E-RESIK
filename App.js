@@ -1,18 +1,11 @@
 import React from "react";
-import {
-  NativeBaseProvider,
-  extendTheme,
-  Text
-
-} from "native-base";
-import { LogBox } from 'react-native';
-LogBox.ignoreLogs(['Native']);
+import { NativeBaseProvider, Text } from "native-base";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import Profile from "./screens/Profile"
-import Home from "./screens/Home"
+import Profile from "./screens/Profile";
+import Home from "./screens/Home";
 import LoginScreen from "./screens/LoginScreen";
 import CreateOrder from "./screens/CreateOrder";
 import ConfirmationOrder from "./screens/ConfirmationOrder";
@@ -30,7 +23,6 @@ import Customer from "./screens/Customer";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
-
 
 const noHead = { headerShown: false };
 
@@ -66,7 +58,7 @@ const Tabs = () => {
             <Ionicons
               name={iconName}
               size={28}
-              color={focused ? "black" : color}
+              color={focused ? "#1a91ff" : color}
             />
           );
         },
@@ -77,7 +69,7 @@ const Tabs = () => {
         },
         tabBarLabel: ({ children, color, focused }) => {
           return (
-            <Text color={focused ? "black" : color} mb={2}>
+            <Text color={focused ? "#1a91ff" : color} mb={2}>
               {children}
             </Text>
           );
@@ -95,14 +87,6 @@ const Tabs = () => {
   );
 };
 
-// Define the config
-const config = {
-  useSystemColorMode: false,
-  initialColorMode: "dark",
-};
-
-// extend the theme
-export const theme = extendTheme({ config });
 const App = () => {
 return (
   <NativeBaseProvider>

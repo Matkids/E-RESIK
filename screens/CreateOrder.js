@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Header } from "../components";
-import { Heading, Button,Box,Stack, TextArea, FormControl, Input, Icon,Select, Center, Flex } from "native-base";
+import { Heading, Button,Box,Stack, FormControl, Input, Icon,Select,} from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 

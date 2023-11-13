@@ -2,8 +2,6 @@ import React from "react";
 import { Button, Box, Stack, Text, Divider, HStack, Icon, Heading } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
-import { Header } from "../components";
-import { SafeAreaView } from "react-native";
 
 const ConfirmationOrder = () => {
   const navigation = useNavigation();

@@ -61,7 +61,7 @@ export default function ModalSignUp(props) {
                             placeholder="Alamat"
                         />
                         <Input value={emailInput} onChangeText={handlEmailChange} InputLeftElement={
-                            <Icon as={Ionicons} name="bag-outline" size="sm" ml="2" />
+                            <Icon as={Ionicons} name="flag-outline" size="sm" ml="2" />
                         }
                             variant="outline"
                             mx="3"

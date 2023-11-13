@@ -4,7 +4,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import Profile from "./screens/Profile";
 import Home from "./screens/Home";
 import LoginScreen from "./screens/LoginScreen";
 import CreateOrder from "./screens/CreateOrder";
@@ -36,17 +35,20 @@ const Tabs = () => {
             case "Home":
               iconName = "home-outline";
               break;
-            case "List":
-              iconName = "people-outline";
+            case "Finance":
+              iconName = "cash-outline";
               break;
             case "Order":
               iconName =  "cart-outline";
               break;
+            case "Customer":
+                iconName = "people-outline";
+                break;
             case "History":
               iconName = "time-outline";
               break;
-            case "Informasi":
-              iconName = "person-circle-outline";
+            case "Information":
+              iconName = "information-outline";
               break;
             case "Profile":
             iconName = "person-circle-outline";
@@ -69,7 +71,7 @@ const Tabs = () => {
         },
         tabBarLabel: ({ children, color, focused }) => {
           return (
-            <Text color={focused ? "#1a91ff" : color} mb={2}>
+            <Text color={focused ? "#1a91ff" : color} mb={2} fontSize={10}>
               {children}
             </Text>
           );
@@ -77,10 +79,10 @@ const Tabs = () => {
       })}
     >
       <Tab.Screen name="Home" component={Home} options={noHead} />
-      <Tab.Screen name="list" component={ListPendapatan} options={noHead} />
+      <Tab.Screen name="Finance" component={ListPendapatan} options={noHead} />
       <Tab.Screen name="Order" component={CreateOrder} options={noHead} />
       <Tab.Screen name="Customer" component={Customer} options={noHead} />
-      <Tab.Screen name="Info" component={Informasi} options={noHead} />
+      <Tab.Screen name="Information" component={Informasi} options={noHead} />
       <Tab.Screen name="Profile" component={ProfileUser} options={noHead} />
 
     </Tab.Navigator>
@@ -107,11 +109,6 @@ return (
       <Stack.Screen name="Customer" component={Customer} options={noHead} />
       <Stack.Screen name="ListCustomer" component={ListCustomer} options={noHead} />
       <Stack.Screen name="CreateCustomer" component={CreateCustomer} options={noHead} />
-
-
-
-      
-
 
     </Stack.Navigator>
   </NavigationContainer>

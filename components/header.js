@@ -26,15 +26,6 @@ const Header = ({}) => {
               <Text fontSize="md">Arif Rahmat Farrel Anggi Risa</Text>
             </VStack>
           </HStack>
-          <HStack>
-            <TouchableOpacity>
-              <FontAwesome5
-                name="money-bill-wave"
-                size={24}
-                color="black"
-              />
-            </TouchableOpacity>
-          </HStack>
         </HStack>
       </Box>
     </SafeAreaView>

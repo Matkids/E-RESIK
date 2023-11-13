@@ -67,13 +67,15 @@ const ProfileUser = () => {
           </HStack>
         </Stack>
       </Box>
+      
     </Box>
-          <Text>
-            <Box alignItems="center" py="10" px="160">
+    <Text>
+            <Box alignItems="center" mx="auto" px="50" py="5">
               <Button 
               onPress={() => navigation.goBack ('')}>KEMBALI</Button>
             </Box>
           </Text>
+
     </>
   );
 };

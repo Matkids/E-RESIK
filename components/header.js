@@ -1,49 +1,39 @@
 import { SafeAreaView } from "react-native-safe-area-context";
-import { StatusBar } from "react-native";
-import { Box, HStack, Image, Heading } from "native-base";
+import { Box, HStack, Image, Text, VStack } from "native-base";
 import { TouchableOpacity } from "react-native";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { useNavigation } from "@react-navigation/native";
+import {FontAwesome5} from "@expo/vector-icons";
 
-const Header = ({ title, withBack = false }) => {
-  const trueGray900 = "#171717";
-  const navigation = useNavigation();
+const Header = ({}) => {
+  const colour = "#FFFF";
   return (
-    <SafeAreaView>
-      <StatusBar barStyle="light" backgroundColor={trueGray900} />
-      <Box bg={"trueGray.900"} p={"4"}>
+    <SafeAreaView edges={["top"]}>
+      <Box bg={colour} p={"4"} px={2} py={2}>
         <HStack justifyContent="space-between" alignItems="center">
           <HStack alignItems="center">
-            {!withBack ? (
-              <>
-                <Image
-                  source={require("../assets/splash.png")}
-                  w="12"
-                  h="12"
-                  alt="CNN Logo"
-                  mr={"3"}
-                />
-              </>
-            ) : (
-              <TouchableOpacity
-                activeOpacity={0.5}
-                onPress={() => navigation.goBack()}
-              >
-                <Box mr={"3"}>
-                  <Ionicons name="arrow-back-outline" size={32} color="white" />
-                </Box>
-              </TouchableOpacity>
-            )}
-            <Heading color={"white"}>{title}</Heading>
+            <>
+              <Image
+                source={require("../assets/logos.png")}
+                w="20"
+                h="12"
+                alt="laundry Logo"
+                mr={"4"}
+              />
+            </>
+            <VStack>
+              <Text bold fontSize="xl">
+                Hi! Welcome
+              </Text>
+              <Text fontSize="md">Farrel Ardan</Text>
+            </VStack>
           </HStack>
-
-          <HStack space={"2xl"}>
-            <Image
-              source={require("../assets/icon.png")}
-              w="5"
-              h="5"
-              alt="Facebook Icon"
-            />
+          <HStack>
+            <TouchableOpacity>
+              <FontAwesome5
+                name="money-bill-wave"
+                size={24}
+                color="black"
+              />
+            </TouchableOpacity>
           </HStack>
         </HStack>
       </Box>

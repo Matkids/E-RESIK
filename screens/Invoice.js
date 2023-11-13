@@ -133,7 +133,7 @@ const Invoice = () => {
           </HStack>
           <Box alignItems="center" mt={2}>
 
-            <Button mb={2} onPress={() => navigation.goBack ('')}>OKE</Button>
+            <Button mb={2} onPress={() => navigation.navigate ('Home')}>OKE</Button>
           </Box>
         </Stack>
       </Box>

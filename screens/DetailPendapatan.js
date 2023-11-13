@@ -1,10 +1,12 @@
+
 import { Header } from "../components/";
-import { Box, HStack, Text, FlatList, Image, VStack, Spacer, Button, AlertDialog } from 'native-base';
+import { Box, HStack, Text, FlatList, Image, VStack, Spacer, Button, AlertDialog,Center } from 'native-base';
 import React from 'react'
 import { useNavigation } from '@react-navigation/native';
 
 
 const DetailPendapatan = () => {
+    
   const navigation = useNavigation();
     const data = [{
         id: "1",
@@ -29,7 +31,11 @@ const DetailPendapatan = () => {
       }];
 
       return (
-      <Box mr="4" ml="4" mt="3" >
+    <>  
+    <Header title={"HOME"} />
+      <Center flex={1}>
+      </Center>
+      <Box mr="4" ml="4" mb="500" >
           <FlatList data={data} renderItem={({item}) =>
             <Box borderBottomWidth="2" borderStyle="dotted" borderColor="#427D9D" pl={["0", "4"]} pr={["0", "5"]} py="2">
             <HStack space={[4, 4]} justifyContent="space-between">
@@ -53,6 +59,7 @@ const DetailPendapatan = () => {
                         Tambah</Button>
           </Box>
               </Box>
+    </>
               );
     
     }

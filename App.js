@@ -9,10 +9,17 @@ import Home from "./screens/Home";
 import LoginScreen from "./screens/LoginScreen";
 import CreateOrder from "./screens/CreateOrder";
 import ConfirmationOrder from "./screens/ConfirmationOrder";
+import ProfileUser from "./screens/Profile";
 import Invoice from "./screens/Invoice";
+import Riwayat from "./screens/riwayat";
+import RincianPesanan from "./screens/rincian_pesanan";
+import Informasi from "./screens/informasi";
 import ListPendapatan from "./screens/ListPendapatan";
 import DetailPendapatan from "./screens/DetailPendapatan";
 import TambahPendapatan from "./screens/TambahPendapatan";
+import ListCustomer from "./screens/ListCustomer";
+import CreateCustomer from "./screens/CreateCustomer";
+import Customer from "./screens/Customer";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -26,25 +33,26 @@ const Tabs = () => {
         tabBarIcon: ({ focused, color }) => {
           let iconName;
           switch (route.name) {
-            case "Beranda":
+            case "Home":
               iconName = "home-outline";
               break;
-            case "Kostumer":
+            case "List":
               iconName = "people-outline";
               break;
             case "Order":
-              iconName = "cart-outline";
+              iconName =  "cart-outline";
               break;
-            case "List":
-              iconName = "cash-outline";
-              break;
-            case "Riwayat":
+            case "History":
               iconName = "time-outline";
               break;
-            case "Profile":
+            case "Informasi":
               iconName = "person-circle-outline";
               break;
+            case "Profile":
+            iconName = "person-circle-outline";
+            break;
 
+  
           }
           return (
             <Ionicons
@@ -68,33 +76,47 @@ const Tabs = () => {
         },
       })}
     >
-      <Tab.Screen name="Beranda" component={Home} options={noHead} />
-      <Tab.Screen name="Kostumer" component={Home} options={noHead} />
+      <Tab.Screen name="Home" component={Home} options={noHead} />
+      <Tab.Screen name="list" component={ListPendapatan} options={noHead} />
       <Tab.Screen name="Order" component={CreateOrder} options={noHead} />
-      <Tab.Screen name="List" component={ListPendapatan} options={noHead} />
-      <Tab.Screen name="Riwayat" component={Home} options={noHead} />
-      <Tab.Screen name="Profile" component={Profile} options={noHead} />
+      <Tab.Screen name="Customer" component={Customer} options={noHead} />
+      <Tab.Screen name="Info" component={Informasi} options={noHead} />
+      <Tab.Screen name="Profile" component={ProfileUser} options={noHead} />
+
     </Tab.Navigator>
   );
 };
 
 const App = () => {
-  return (
-    <NativeBaseProvider>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={Tabs} options={noHead} />
-          <Stack.Screen name="LoginScreen" component={LoginScreen} options={noHead} />
-          <Stack.Screen name="CreateOrder" component={CreateOrder} options={noHead} />
-          <Stack.Screen name="Confirmation" component={ConfirmationOrder} options={noHead} />
-          <Stack.Screen name="Invoice" component={Invoice} options={noHead} />
-          <Stack.Screen name="ListPendapatan" component={Tabs} options={noHead} />
-          <Stack.Screen name="DetailPendapatan" component={DetailPendapatan}/>
-          <Stack.Screen name="TambahPendapatan" component={TambahPendapatan}/>
-        </Stack.Navigator>
-      </NavigationContainer>
-    </NativeBaseProvider>
-  );
+return (
+  <NativeBaseProvider>
+    <NavigationContainer>
+    <Stack.Navigator>
+      <Stack.Screen name="LoginScreen" component={LoginScreen} options={noHead} />
+      <Stack.Screen name="Home" component={Tabs} options={noHead} />
+      <Stack.Screen name="ProfileUser" component={ProfileUser} options={noHead} />
+      <Stack.Screen name="CreateOrder" component={Tabs} options={noHead} />
+      <Stack.Screen name="Confirmation" component={ConfirmationOrder} options={noHead} />
+      <Stack.Screen name="Invoice" component={Invoice} options={noHead} />
+      <Stack.Screen name="Riwayat" component={Riwayat} options={noHead}/>
+      <Stack.Screen name="rincian" component={RincianPesanan} options={noHead}/>
+      <Stack.Screen name="informasi" component={Informasi} options={noHead}/>
+      <Stack.Screen name="ListPendapatan" component={Tabs} options={noHead} />
+      <Stack.Screen name="DetailPendapatan" component={DetailPendapatan} options={noHead} />
+      <Stack.Screen name="TambahPendapatan" component={TambahPendapatan} options={noHead} />
+      <Stack.Screen name="Customer" component={Customer} options={noHead} />
+      <Stack.Screen name="ListCustomer" component={ListCustomer} options={noHead} />
+      <Stack.Screen name="CreateCustomer" component={CreateCustomer} options={noHead} />
+
+
+
+      
+
+
+    </Stack.Navigator>
+  </NavigationContainer>
+  </NativeBaseProvider>
+);
 }
 
 export default App;

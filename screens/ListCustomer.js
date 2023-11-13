@@ -1,8 +1,11 @@
+
 import { Box, Center, Heading, Text, Stack, ScrollView, Button, Modal, VStack, HStack, TouchableOpacity } from "native-base";
 import { Header } from "../components";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
+import Ionicons from "@expo/vector-icons/Ionicons";
+
 
 const ListCustomer = () => {
     //Deklarasi
@@ -14,7 +17,8 @@ const ListCustomer = () => {
         <>
             <Header title={"Customer"} />
             <Center flex="1" bg="#9BBEC8">
-            <Heading bg="primary.800" h="50" w="full" CC bold size="lg" color="muted.100" style={{ textAlign: 'center', textAlignVertical: 'center'}}>
+            <Heading bg="primary.800" h="50" w="full" CC bold size="lg" color="muted.100" style={{ textAlign: 'center', textAlignVertical: 'center'}}
+            >
                 List Customer
             </Heading>
                 <ScrollView>
@@ -23,14 +27,14 @@ const ListCustomer = () => {
                             {/* Customer 1 */}
                             <Stack p="4" space={3}>
                                 <Stack space={2}>
-                                    <Heading size="md" ml="-1">
-                                        Anggi Aulia Putri
-                                    </Heading>
-                                    <Text fontSize="xs" _light={{
-                                        color: "primary.800"
-                                    }}>
-                                        Customer 1
-                                    </Text>
+                                        <Heading size="md" ml="-1">
+                                            Anggi Aulia Putri
+                                        </Heading>
+                                        <Text fontSize="xs" _light={{
+                                            color: "primary.800"
+                                        }}>
+                                            Customer 1
+                                        </Text>
                                 </Stack>
                                 <Text  onPress={() => setShowModal(true)} fontWeight="400">
                                     Klik untuk detail customer.
@@ -162,9 +166,12 @@ const ListCustomer = () => {
                             </Stack>
                         </Box>
 
-                        {/* BUTTON BELUM SELESAI */}
                         <Button bg="primary.800" md="5" mt={5} onPress={() =>
                             navigation.navigate('CreateCustomer')}>Create Customer</Button>
+                            <Box>
+                                <Button  bg="primary.800" md="5" mt={5} onPress={() =>
+                                navigation.goBack('')} > Kembali </Button> 
+                            </Box>                            
                     </SafeAreaView>
                 </ScrollView>
             </Center>

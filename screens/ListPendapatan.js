@@ -1,12 +1,19 @@
-import { Box, Stack, Heading, HStack, Text, ScrollView, Image } from 'native-base';
+
+import { Box, Stack, Heading, HStack, Text, ScrollView, Image, Center} from 'native-base';
 import { SafeAreaView, TouchableOpacity } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
+import { Header } from '../components';
 
 
 
 const ListPendapatan = () => {
   const navigation = useNavigation();
   return (
+    
+    <>
+    <Header title={"HOME"} />
+      <Center flex={1}>
+      </Center>
     <SafeAreaView backgroundColor={"#427D9D"}>
       <ScrollView>
         <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.navigate('DetailPendapatan')}>
@@ -77,6 +84,7 @@ const ListPendapatan = () => {
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
+    </>
   );
 };
 

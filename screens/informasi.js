@@ -148,6 +148,7 @@ const Informasi = () => {
           <Heading fontSize="xl" p="4" pb="3">
             Informasi Harga
           </Heading>
+          <Box ml={'20'} mt={'2'}> 
           <Button
             mx={2}
             my={2}
@@ -159,6 +160,7 @@ const Informasi = () => {
           >
             <Text color={"#FFF"}>Edit</Text>
           </Button>
+          </Box>
           <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
             <Modal.Content maxWidth="400px">
               <Modal.CloseButton />

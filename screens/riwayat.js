@@ -7,10 +7,7 @@ import {
   HStack,
   Button,
   Box,
-  FormControl,
   Modal,
-  Input,
-  Heading,
 } from "native-base";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";

@@ -8,16 +8,15 @@ const CreateOrder = () => {
   const [nama, setNama] = useState("");
   const [noHp, setNoHp] = useState("");
   const [alamat, setAlamat] = useState("");
-  const [jenisLayanan, setJenisLayanan] = useState("");
-  const [tanggalPesanan, setTanggalPesanan] = useState("");
+  const [layanan, setLayanan] = useState(""); // changed label to layanan
+  const [tanggal, setTanggal] = useState(""); // changed label to tanggal
   const [berat, setBerat] = useState("");
   const [keterangan, setKeterangan] = useState("");
   const navigation = useNavigation();
 
-  const jenisLayananOptions = [
-    { label: "Cuci Basah", value: "Cuci Basah" },
-    { label: "Cuci Kering", value: "Cuci Kering" },
-    { label: "Cuci Setrika", value: "Cuci Setrika" },
+  const layananOptions = [ // changed label to layanan
+    { label: "Cuci Kiloan", value: "Cuci Kiloan" }, // changed options
+    { label: "Cuci Satuan", value: "Cuci Satuan" }, // changed options
   ];
 
   return (
@@ -59,14 +58,14 @@ const CreateOrder = () => {
         </FormControl>
         <FormControl>
           <Select
-            placeholder="Jenis Layanan"
-            value={jenisLayanan}
-            onValueChange={setJenisLayanan}
+            placeholder="Layanan" // changed label to layanan
+            value={layanan} // changed label to layanan
+            onValueChange={setLayanan} // changed label to layanan
             InputLeftElement={
               <Icon margin={2} as={MaterialIcons} name="work" size={5} />
             }
           >
-            {jenisLayananOptions.map((option) => (
+            {layananOptions.map((option) => (
               <Select.Item
                 label={option.label}
                 value={option.value}
@@ -77,9 +76,9 @@ const CreateOrder = () => {
         </FormControl>
         <FormControl>
           <Input
-            placeholder="Tanggal Pesanan"
-            value={tanggalPesanan}
-            onChangeText={setTanggalPesanan}
+            placeholder="Tanggal" // changed label to tanggal
+            value={tanggal} // changed label to tanggal
+            onChangeText={setTanggal} // changed label to tanggal
             InputLeftElement={
               <Icon margin={2} as={MaterialIcons} name="date-range" size={5} />
             }

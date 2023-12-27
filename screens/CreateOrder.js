@@ -4,6 +4,7 @@ import { Heading, Button,Box,Stack, FormControl, Input, Icon,Select,} from "nati
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
+
 const CreateOrder = () => {
   const [nama, setNama] = useState("");
   const [noHp, setNoHp] = useState("");
@@ -22,12 +23,13 @@ const CreateOrder = () => {
   return (
     <Box>
       <Header />
-      <Heading mt={5} as="h1" size="lg" textAlign="center">
-        Buat Pesanan
-      </Heading>
       <Stack space={4} w="90%" mx="auto" mt={8}>
         <FormControl>
           <Input
+          bg={'#FFFF'}
+          borderColor={'#1a91ff'}
+          mx={4}
+          py={4}
             placeholder="Nama"
             value={nama}
             onChangeText={setNama}
@@ -38,6 +40,10 @@ const CreateOrder = () => {
         </FormControl>
         <FormControl>
           <Input
+          bg={'#FFFF'}
+          borderColor={'#1a91ff'}
+          mx={4}
+          py={4}
             placeholder="Nomor HP"
             value={noHp}
             onChangeText={setNoHp}
@@ -48,6 +54,10 @@ const CreateOrder = () => {
         </FormControl>
         <FormControl>
           <Input
+          bg={'#FFFF'}
+          borderColor={'#1a91ff'}
+          mx={4}
+          py={4}
             placeholder="Alamat"
             value={alamat}
             onChangeText={setAlamat}
@@ -58,6 +68,10 @@ const CreateOrder = () => {
         </FormControl>
         <FormControl>
           <Select
+          bg={'#FFFF'}
+          borderColor={'#1a91ff'}
+          mx={4}
+          py={4}
             placeholder="Layanan" // changed label to layanan
             value={layanan} // changed label to layanan
             onValueChange={setLayanan} // changed label to layanan
@@ -76,6 +90,10 @@ const CreateOrder = () => {
         </FormControl>
         <FormControl>
           <Input
+          bg={'#FFFF'}
+          borderColor={'#1a91ff'}
+          mx={4}
+          py={4}
             placeholder="Tanggal" // changed label to tanggal
             value={tanggal} // changed label to tanggal
             onChangeText={setTanggal} // changed label to tanggal
@@ -86,6 +104,10 @@ const CreateOrder = () => {
         </FormControl>
         <FormControl>
           <Input
+          bg={'#FFFF'}
+          borderColor={'#1a91ff'}
+          mx={4}
+          py={4}
             placeholder="Berat (kg)"
             value={berat}
             onChangeText={setBerat}
@@ -96,6 +118,10 @@ const CreateOrder = () => {
         </FormControl>
         <FormControl>
           <Input
+          bg={'#FFFF'}
+          borderColor={'#1a91ff'}
+          mx={4}
+          py={4}
             placeholder="Keterangan"
             value={keterangan}
             onChangeText={setKeterangan}
@@ -105,7 +131,7 @@ const CreateOrder = () => {
           />
         </FormControl>
         <Box alignItems="center" mt={2}>
-          <Button onPress={() => navigation.navigate("Confirmation")}>
+          <Button rounded={'xl'} bg={'#1a91ff'} onPress={() => navigation.navigate("Confirmation")}>
             Submit Pesanan
           </Button>
         </Box>

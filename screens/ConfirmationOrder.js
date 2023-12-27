@@ -8,6 +8,7 @@ const ConfirmationOrder = () => {
 
   return (
     <Box>
+      <Box my={10} mx={5} pb={4} rounded={'xl'}  bg={'#FFFF'}>
       <Box
         p={2}
         shadow={2}
@@ -28,6 +29,7 @@ const ConfirmationOrder = () => {
             Ayo cek pesananmu!
           </Heading>
         </HStack>
+        
         <Stack space={4} w="90%" mx="auto" mt={4}>
           <HStack alignItems="center">
             <Icon as={<Ionicons name="person" />} />
@@ -44,7 +46,6 @@ const ConfirmationOrder = () => {
             <Text bold> Alamat</Text>
           </HStack>
           <Text>Sidoarjo - Jawa Timur</Text>
-          <Divider my={4} />
           <HStack alignItems="center">
             <Icon as={<Ionicons name="list" />} />
             <Text bold> Jenis Layanan</Text>
@@ -67,14 +68,13 @@ const ConfirmationOrder = () => {
           <Text mb={3}>Baju Batik, Baju Sekolah, Baju Pramuka</Text>
         </Stack>
       </Box>
-      <Box bg="white" p={2}>
         <Text fontSize="lg" fontWeight="bold" textAlign="center">
           Harga: Rp35.000
         </Text>
-        <Button onPress={() => navigation.navigate("Invoice")} mt={2} mr={10} ml={10}>
+        <Button bg={'#1a91ff'} rounded={'xl'} onPress={() => navigation.navigate("Invoice")} mt={2} mr={10} ml={10}>
           Konfirmasi Pesanan
         </Button>
-      </Box>
+    </Box>
     </Box>
   );
 };

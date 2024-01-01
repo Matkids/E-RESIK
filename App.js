@@ -1,16 +1,27 @@
+import React from "react";
+
+import { NativeBaseProvider, Text } from "native-base";
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
-import { NativeBaseProvider, Text } from "native-base";
-import { Ionicons } from "@expo/vector-icons";
-import Beranda from "./screens/beranda";
-import Profile from "./screens/profile";
-import Informasi from "./screens/informasi";
-import Riwayat from "./screens/riwayat";
-import ListPesanan from "./screens/rincian_pesanan";
-import Pelanggan from "./screens/pelanggan";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import Beranda from "./screens/Beranda";
+import Masuk from "./screens/Masuk";
+import BuatPesanan from "./screens/BuatPesanan";
+// import KonfirmasiPesanan from "./screens/KonfirmasiPesanan";
 
-// Navigator Declaration
+// import Tagihan from "./screens/Tagihan";
+import Riwayat from "./screens/Riwayat";
+import RincianPesanan from "./screens/RincianPesanan"
+import Layanan from "./screens/Layanan";
+// import Pendapatan from "./screens/Pendapatan";
+// import DetailPendapatan from "./screens/DetailPendapatan";
+// import TambahPendapatan from "./screens/TambahPendapatan";
+// import ListPelanggan from "./screens/ListPelanggan";
+import Profil from "./screens/Profil";
+// import Tips from "./screens/Tips";
+// import BuatPelanggan from "./screens/BuatPelanggan";
+
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -26,16 +37,10 @@ const Tabs = () => {
             case "Beranda":
               iconName = "home-outline";
               break;
-            case "Pelanggan":
-              iconName = "people-circle-outline";
+            case "Buat Pesanan":
+              iconName = "cart-outline";
               break;
-            case "Informasi":
-              iconName = "newspaper-outline";
-              break;
-            case "Riwayat":
-              iconName = "albums-outline";
-              break;
-            case "Profile":
+            case "Profil":
               iconName = "person-circle-outline";
               break;
           }
@@ -43,7 +48,7 @@ const Tabs = () => {
             <Ionicons
               name={iconName}
               size={28}
-              color={focused ? "#1a91ff" : color}
+              color={focused ? "#0878CA" : color}
             />
           );
         },
@@ -54,7 +59,7 @@ const Tabs = () => {
         },
         tabBarLabel: ({ children, color, focused }) => {
           return (
-            <Text color={focused ? "#1a91ff" : color} mb={2}>
+            <Text color={focused ? "#0878CA" : color} mb={2} fontSize={10}>
               {children}
             </Text>
           );
@@ -62,10 +67,12 @@ const Tabs = () => {
       })}
     >
       <Tab.Screen name="Beranda" component={Beranda} options={noHead} />
-      <Tab.Screen name="Pelanggan" component={Pelanggan} options={noHead} />
-      <Tab.Screen name="Informasi" component={Informasi} options={noHead} />
-      <Tab.Screen name="Riwayat" component={Riwayat} options={noHead} />
-      <Tab.Screen name="Profile" component={Profile} options={noHead} />
+      <Tab.Screen
+        name="Buat Pesanan"
+        component={BuatPesanan}
+        options={noHead}
+      />
+      <Tab.Screen name="Profil" component={Profil} options={noHead} />
     </Tab.Navigator>
   );
 };
@@ -75,12 +82,49 @@ const App = () => {
     <NativeBaseProvider>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Tabs" component={Tabs} options={noHead} />
+          <Stack.Screen name="Masuk" component={Masuk} options={noHead} />
+          <Stack.Screen name="Beranda" component={Tabs} options={noHead} />
+          <Stack.Screen name="Profil" component={Tabs} options={noHead} />
+          {/* <Stack.Screen name="BuatPesanan" component={Tabs} options={noHead} />
           <Stack.Screen
-            name="ListPesanan"
-            component={ListPesanan}
+            name="KonfirmasiPesanan"
+            component={KonfirmasiPesanan}
             options={noHead}
           />
+          <Stack.Screen name="Tagihan" component={Tagihan} options={noHead} /> */}
+          <Stack.Screen name="Riwayat" component={Riwayat} options={noHead} />
+          <Stack.Screen
+            name="RincianPesanan"
+            component={RincianPesanan}
+            options={noHead}
+          />
+          <Stack.Screen name="Layanan" component={Layanan} options={noHead} />
+          {/* <Stack.Screen
+            name="Pendapatan"
+            component={Pendapatan}
+            options={noHead}
+          />
+          <Stack.Screen
+            name="DetailPendapatan"
+            component={DetailPendapatan}
+            options={noHead}
+          />
+          <Stack.Screen
+            name="TambahPendapatan"
+            component={TambahPendapatan}
+            options={noHead}
+          />
+          <Stack.Screen name="Tips" component={Tips} options={noHead} />
+          <Stack.Screen
+            name="ListPelanggan"
+            component={ListPelanggan}
+            options={noHead}
+          />
+          <Stack.Screen
+            name="BuatPelanggan"
+            component={BuatPelanggan}
+            options={noHead}
+          /> */}
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>

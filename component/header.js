@@ -1,40 +1,42 @@
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Box, HStack, Image, Text, VStack } from "native-base";
+import { StatusBar } from "react-native";
+import { Box, HStack, Image, Text, VStack, Heading } from "native-base";
 import { TouchableOpacity } from "react-native";
-import {FontAwesome5} from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
-const Header = ({}) => {
+const Header = ({ title, withBack = false }) => {
   const colour = "#FFFF";
+  const navigation = useNavigation();
   return (
-    <SafeAreaView edges={["top"]}>
-      <Box bg={colour} p={"4"} px={2} py={2}>
-        <HStack justifyContent="space-between" alignItems="center">
-          <HStack alignItems="center">
+    <SafeAreaView>
+      <StatusBar barStyle="light" backgroundColor={colour} />
+      <Box bg={colour} p={"4"} px={2} py={4}>
+        <HStack alignItems="center">
+          {!withBack ? (
             <>
               <Image
-                source={require("../assets/Logo.png")}
-                w="20"
+                source={require("../assets/icon.png")}
+                w="12"
                 h="12"
-                alt="laundry Logo"
-                mr={"4"}
+                alt="Logo"
+                mr={"3"}
               />
             </>
-            <VStack>
-              <Text bold fontSize="xl">
-                Hi! Welcome
-              </Text>
-              <Text fontSize="md">Farrel Ardan</Text>
-            </VStack>
-          </HStack>
-          <HStack>
-            <TouchableOpacity>
-              <FontAwesome5
-                name="money-bill-wave"
-                size={24}
-                color="black"
-              />
+          ) : (
+            <TouchableOpacity
+              activeOpacity={0.5}
+              onPress={() => navigation.goBack()}
+            >
+              <Box mr={3} ml={2}>
+                <Ionicons name="arrow-back-outline" size={32} color="black" />
+              </Box>
             </TouchableOpacity>
-          </HStack>
+          )}
+          <Heading color={"black"} size={"md"}>
+            {title}
+          </Heading>
         </HStack>
       </Box>
     </SafeAreaView>

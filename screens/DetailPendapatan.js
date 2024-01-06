@@ -1,66 +1,156 @@
-
+// berisi penjelasan kode nya
 import { Header } from "../components/";
-import { Box, HStack, Text, FlatList, Image, VStack, Spacer, Button, AlertDialog,Center } from 'native-base';
-import React from 'react'
-import { useNavigation } from '@react-navigation/native';
-
+import {
+  Box,
+  HStack,
+  Text,
+  FlatList,
+  Image,
+  VStack,
+  Spacer,
+  Button,
+  Center,
+  Badge
+} from "native-base";
+import React, { useEffect, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+import FIREBASE from "../src/config/FIREBASE"; // Pastikan  mengimpor modul FIREBASE
 
 const DetailPendapatan = () => {
-    
   const navigation = useNavigation();
-    const data = [{
-        id: "1",
-        hari: "Senin",
-        pendapatan: "Rp. 500.000,-"
-      }, {
-        id: "2",
-        hari: "Selasa",
-        pendapatan: "Rp. 450.000,-"
-      }, {
-        id: "3",
-        hari: "Rabu",
-        pendapatan: "Rp. 1.000.000,-"
-      }, {
-        id: "4",
-        hari: "Kamis",
-        pendapatan: "Rp. 650.0000,-"
-      }, {
-        id: "5",
-        hari: "Jumat",
-        pendapatan: "Rp. 300.000,-"
-      }];
+  const [pendapatanList, setPendapatanList] = useState([]);
+  const [totalPemasukan, setTotalPemasukan] = useState(0);
 
-      return (
-    <>  
-    <Header title={"HOME"} />
-      <Center flex={1}>
-      </Center>
-      <Box mr="4" ml="4" mb="500" >
-          <FlatList data={data} renderItem={({item}) =>
-            <Box borderBottomWidth="2" borderStyle="dotted" borderColor="#427D9D" pl={["0", "4"]} pr={["0", "5"]} py="2">
-            <HStack space={[4, 4]} justifyContent="space-between">
-              <Image source={require("../assets/hari.jpg")} w="10" h="10"></Image>
-                  <VStack>
-                    <Text color="#427D9D" mt="2" bold>
-                      {item.hari}
-                    </Text>
-                  </VStack>
-                  <Spacer />
-                  <Text fontSize="xs" color="#427D9D" alignSelf="flex-start" mt="2">
-                    {item.pendapatan}
-                  </Text>
-                </HStack>
-                </Box>} keyExtractor={item => item.id} />
-                <Box alignItems="center">
-                <Button mt="7"
-                        onPress={() => navigation.navigate('TambahPendapatan')
-                        }
-                    >
-                        Tambah</Button>
-          </Box>
-              </Box>
-    </>
-              );
-    
+  // Mengambil data dari Firebase dan menghitung total pemasukan
+  const fetchData = async () => {
+    try {
+      const db = FIREBASE.database();
+      const snapshot = await db.ref("TambahPendapatan").once("value");
+
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        const pendapatanArray = Object.entries(data).map(([key, value]) => ({
+          id: key,
+          ...value,
+        }));
+        setPendapatanList(pendapatanArray);
+
+        // Menghitung totalPemasukan
+        const total = pendapatanArray.reduce((acc, item) => {
+          return acc + parseFloat(item.totalpemasukan);
+        }, 0);
+        setTotalPemasukan(total);
+      } else {
+        console.log("No data available");
+      }
+    } catch (error) {
+      console.error("Error fetching data from Firebase:", error.message);
     }
-export default DetailPendapatan
+  };
+
+  // Mengambil data saat komponen pertama kali dimount
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  // Menghapus data dari Firebase berdasarkan ID
+  const handleDelete = async (id) => {
+    try {
+      const db = FIREBASE.database();
+      await db.ref(`TambahPendapatan/${id}`).remove();
+
+      // Mengambil data terbaru setelah penghapusan
+      fetchData();
+    } catch (error) {
+      console.error("Error deleting data from Firebase:", error.message);
+    }
+  };
+
+  return (
+    <>
+      {/* Header */}
+      <Header title={"Detail Pedapatan"} withBack="true" />
+
+      {/* Konten Utama */}
+      <Center flex={1}></Center>
+      <Box mx={4} my={4} mb="500">
+        {/* Enhanced UI for Total Pemasukan */}
+        <Box
+          p="4"
+          mb="4"
+          borderRadius="xl"
+          bg="#0878CA"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Text fontSize="lg" color="white" fontWeight="bold">
+            Total Pemasukan
+          </Text>
+          <Badge
+            variant="outline"
+            colorScheme="white"
+            p="2"
+            mt="2"
+            borderRadius="md"
+          >
+            <Text color="white">Rp. {totalPemasukan.toFixed(2)},-</Text>
+          </Badge>
+        </Box>
+
+        {/* List Data Pendapatan */}
+        <FlatList
+          data={pendapatanList}
+          renderItem={({ item }) => (
+            <Box
+              borderBottomWidth="2"
+              borderStyle="dotted"
+              borderColor="#0878CA"
+              pl={["0", "4"]}
+              pr={["0", "5"]}
+              py="2"
+            >
+              <HStack space={[4, 4]} justifyContent="space-between">
+                <VStack alignItems="center">
+                  <Text color="#0878CA" mt="2" bold>
+                    {item.tanggal}
+                  </Text>
+                  <Image source={require("../assets/hari.jpg")} w="10" h="10" />
+                </VStack>
+                <VStack>
+                  <Text color="#0878CA" mt="2" bold>
+                    {item.hari}
+                  </Text>
+                </VStack>
+                <Spacer />
+                <Text fontSize="xs" color="#0878CA" alignSelf="flex-start" mt="2">
+                  {`Rp. ${item.totalpemasukan},-`}
+                </Text>
+                <Button
+                  variant="outline"
+                  size="xs"
+                  onPress={() => handleDelete(item.id)}
+                >
+                  Delete
+                </Button>
+              </HStack>
+            </Box>
+          )}
+          keyExtractor={(item) => item.id}
+        />
+
+        {/* Tombol Tambah */}
+        <Box alignItems="center">
+          <Button
+            mt="7"
+            bg={"#0878CA"}
+            onPress={() => navigation.replace("TambahPendapatan")}
+          >
+            Tambah
+          </Button>
+        </Box>
+      </Box>
+    </>
+  );
+};
+
+export default DetailPendapatan;

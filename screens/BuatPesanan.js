@@ -14,32 +14,73 @@ import {
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import FIREBASE from "../src/config/FIREBASE";
 
 const BuatPesanan = () => {
+  // State untuk menyimpan data input pengguna
   const [nama, setNama] = useState("");
   const [noHp, setNoHp] = useState("");
   const [alamat, setAlamat] = useState("");
-  const [layanan, setLayanan] = useState(""); // changed label to layanan
-  const [tanggal, setTanggal] = useState(""); // changed label to tanggal
+  const [layanan, setLayanan] = useState(""); // Label diubah menjadi layanan
+  const [tanggal, setTanggal] = useState(""); // Label diubah menjadi tanggal
   const [berat, setBerat] = useState("");
   const [keterangan, setKeterangan] = useState("");
+  const [Harga, setHarga] = useState("");
+
+  // Navigasi untuk berpindah antar layar
   const navigation = useNavigation();
 
+  // Opsi untuk pilihan layanan
   const layananOptions = [
-    // changed label to layanan
-    { label: "Laundry Express", value: "Laundry Express" }, // changed options
-    { label: "Laundry Regular", value: "Laundry Regular" }, // changed options
+    { label: "Laundry Express", value: "Laundry Express" },
+    { label: "Laundry Regular", value: "Laundry Regular" },
     { label: "Cuci + Kering + Setrika", value: "Cuci + Kering + Setrika" },
     { label: "Setrika", value: "Setrika" },
   ];
 
+  // Fungsi untuk membuat pesanan dan menyimpannya di database Firebase
+  const buatPesanan = () => {
+    // Membuat objek data pesanan dari input pengguna
+    const pesananData = {
+      nama,
+      noHp,
+      alamat,
+      layanan,
+      tanggal,
+      berat,
+      keterangan,
+      Harga,
+    };
+
+    // Menampilkan data pesanan di console
+    console.log(pesananData);
+
+    // Mengakses referensi ke node "Pesanan" di database Firebase
+    const pesananRef = FIREBASE.database().ref('Pesanan');
+
+    // Menyimpan data pesanan ke database Firebase
+    pesananRef.push(pesananData)
+      .then(() => {
+        console.log('Data pesanan berhasil ditambahkan!');
+        navigation.navigate("KonfirmasiPesanan"); // Navigasi ke layar KonfirmasiPesanan setelah menambahkan pesanan
+      })
+      .catch((error) => {
+        console.error('Gagal menambahkan data pesanan:', error);
+      });
+  };
+
+  // Komponen yang akan ditampilkan di layar
   return (
     <>
+      {/* Header aplikasi */}
       <Header title={"Buat Pesanan"} withBack="true" />
 
+      {/* Scroll view untuk konten agar bisa di-scroll jika panjangnya melebihi layar */}
       <ScrollView>
+        {/* Konten form untuk membuat pesanan */}
         <Box>
           <Stack space={4} w="90%" mx="auto" mt={8}>
+            {/* Input untuk nama */}
             <FormControl>
               <Input
                 bg={"#FFFF"}
@@ -54,6 +95,7 @@ const BuatPesanan = () => {
                 }
               />
             </FormControl>
+            {/* Input untuk nomor HP */}
             <FormControl>
               <Input
                 bg={"#FFFF"}
@@ -68,6 +110,7 @@ const BuatPesanan = () => {
                 }
               />
             </FormControl>
+            {/* Input untuk alamat */}
             <FormControl>
               <Input
                 bg={"#FFFF"}
@@ -82,19 +125,21 @@ const BuatPesanan = () => {
                 }
               />
             </FormControl>
+            {/* Dropdown untuk memilih jenis layanan */}
             <FormControl>
               <Select
                 bg={"#FFFF"}
                 borderColor={"#0878CA"}
                 mx={4}
                 borderRadius={"lg"}
-                placeholder="Layanan" // changed label to layanan
-                value={layanan} // changed label to layanan
-                onValueChange={setLayanan} // changed label to layanan
+                placeholder="Layanan"
+                value={layanan}
+                onValueChange={setLayanan}
                 InputLeftElement={
                   <Icon margin={2} as={MaterialIcons} name="work" size={5} />
                 }
               >
+                {/* Menampilkan opsi-opsi layanan */}
                 {layananOptions.map((option) => (
                   <Select.Item
                     label={option.label}
@@ -104,15 +149,16 @@ const BuatPesanan = () => {
                 ))}
               </Select>
             </FormControl>
+            {/* Input untuk tanggal pesanan */}
             <FormControl>
               <Input
                 bg={"#FFFF"}
                 borderColor={"#0878CA"}
                 mx={4}
                 borderRadius={"lg"}
-                placeholder="Tanggal" // changed label to tanggal
-                value={tanggal} // changed label to tanggal
-                onChangeText={setTanggal} // changed label to tanggal
+                placeholder="Tanggal"
+                value={tanggal}
+                onChangeText={setTanggal}
                 InputLeftElement={
                   <Icon
                     margin={2}
@@ -123,6 +169,7 @@ const BuatPesanan = () => {
                 }
               />
             </FormControl>
+            {/* Input untuk berat pesanan */}
             <FormControl>
               <Input
                 bg={"#FFFF"}
@@ -142,6 +189,7 @@ const BuatPesanan = () => {
                 }
               />
             </FormControl>
+            {/* Input untuk keterangan pesanan */}
             <FormControl>
               <Input
                 bg={"#FFFF"}
@@ -156,11 +204,27 @@ const BuatPesanan = () => {
                 }
               />
             </FormControl>
+            {/* Input untuk harga pesanan */}
+            <FormControl>
+              <Input
+                bg={"#FFFF"}
+                borderColor={"#0878CA"}
+                mx={4}
+                borderRadius={"lg"}
+                placeholder="Harga"
+                value={Harga}
+                onChangeText={setHarga}
+                InputLeftElement={
+                  <Icon margin={2} as={MaterialIcons} name="cash-outline" size={5} />
+                }
+              />
+            </FormControl>
+            {/* Tombol untuk membuat pesanan */}
             <Box alignItems="center" mt={2}>
               <Button
                 rounded={"xl"}
                 bg={"#0878CA"}
-                onPress={() => navigation.navigate("KonfirmasiPesanan")}
+                onPress={buatPesanan}
               >
                 Buat Pesanan
               </Button>

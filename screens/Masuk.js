@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Text, HStack, Button, Icon, KeyboardAvoidingView, Input, Heading, VStack, Center } from "native-base";
-import ModalSignUp from "../components/ModalDaftar.js";
 import { Ionicons } from '@expo/vector-icons';
 import Companylogo from "../components/Companylogo.js";
 import { useNavigation } from "@react-navigation/native";

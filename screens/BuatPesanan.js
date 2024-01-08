@@ -21,8 +21,8 @@ const BuatPesanan = () => {
   const [nama, setNama] = useState("");
   const [noHp, setNoHp] = useState("");
   const [alamat, setAlamat] = useState("");
-  const [layanan, setLayanan] = useState(""); // Label diubah menjadi layanan
-  const [tanggal, setTanggal] = useState(""); // Label diubah menjadi tanggal
+  const [layanan, setLayanan] = useState(""); 
+  const [tanggal, setTanggal] = useState("");
   const [berat, setBerat] = useState("");
   const [keterangan, setKeterangan] = useState("");
   const [Harga, setHarga] = useState("");
@@ -200,7 +200,7 @@ const BuatPesanan = () => {
                 value={keterangan}
                 onChangeText={setKeterangan}
                 InputLeftElement={
-                  <Icon margin={2} as={MaterialIcons} name="note" size={5} />
+                  <Icon margin={2} as={MaterialIcons} name="clipboard" size={5} />
                 }
               />
             </FormControl>
@@ -215,7 +215,7 @@ const BuatPesanan = () => {
                 value={Harga}
                 onChangeText={setHarga}
                 InputLeftElement={
-                  <Icon margin={2} as={MaterialIcons} name="cash-outline" size={5} />
+                  <Icon margin={2} as={MaterialIcons} name="material-symbols-outlined" size={5} />
                 }
               />
             </FormControl>

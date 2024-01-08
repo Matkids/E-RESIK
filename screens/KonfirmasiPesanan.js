@@ -84,7 +84,47 @@ const KonfirmasiPesanan = () => {
             {/* Menampilkan nama dari latestPesanan. */}
             <Text>{latestPesanan?.nama}</Text>
 
-            {/* (Langkah serupa diikuti untuk data lainnya seperti Nomor HP, Alamat, dll.) */}
+                        {/* Menambahkan nomor hp */}
+                        <HStack alignItems="center">
+              <Icon as={<Ionicons name="call" />} />
+              <Text bold> Nomor HP</Text>
+            </HStack>
+            <Text>{latestPesanan?.noHp}</Text>
+
+            {/* Menambahkan alamat */}
+            <HStack alignItems="center">
+              <Icon as={<Ionicons name="location" />} />
+              <Text bold> Alamat</Text>
+            </HStack>
+            <Text>{latestPesanan?.alamat}</Text>
+
+            {/* Menambahkan layanan */}
+            <HStack alignItems="center">
+              <Icon as={<Ionicons name="hammer" />} />
+              <Text bold> Layanan</Text>
+            </HStack>
+            <Text>{latestPesanan?.layanan}</Text>
+
+            {/* Menambahkan tanggal */}
+            <HStack alignItems="center">
+              <Icon as={<Ionicons name="calendar" />} />
+              <Text bold> Tanggal</Text>
+            </HStack>
+            <Text>{latestPesanan?.tanggal}</Text>
+
+            {/* Menambahkan berat */}
+            <HStack alignItems="center">
+              <Icon as={<Ionicons name="barbell" />} />
+              <Text bold> Berat (kg)</Text>
+            </HStack>
+            <Text>{latestPesanan?.berat}</Text>
+
+            {/* Menambahkan keterangan */}
+            <HStack alignItems="center">
+              <Icon as={<Ionicons name="clipboard" />} />
+              <Text bold> Keterangan</Text>
+            </HStack>
+            <Text>{latestPesanan?.keterangan}</Text>
 
             {/* Menampilkan Total Harga dengan teks berwarna biru dan berukuran lebih besar. */}
             <Text fontSize="lg" fontWeight="bold" textAlign="center" mb={3}>

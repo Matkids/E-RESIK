@@ -52,7 +52,7 @@ const Cuaca = () => {
       });
   };
 
-  // Render komponen antarmuka pengguna (UI)
+  // Render komponen antarmuka pengguna E-Resik (UI)
   return (
     <VStack>
       {/* Header dengan judul "Cuaca" dan tombol back */}

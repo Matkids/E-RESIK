@@ -18,7 +18,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import FIREBASE from "../src/config/FIREBASE";
 
 const ListPelanggan = () => {
-  // Menggunakan useNavigation hook dari React Navigation untuk mendapatkan objek navigasi.
+  // Menggunakan useNavigation hook dari React Navigation untuk mendapatkan objek navigasi
   const navigation = useNavigation();
 
   // State untuk menangani tampilan modal dan data pelanggan terpilih.

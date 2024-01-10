@@ -24,7 +24,7 @@ const BuatPelanggan = () => {
   const [alamat, setAlamat] = useState("");
 
   const tambahPelanggan = () => {
-    // Membuat objek data pelanggan
+    // Membuat objek data pelanggan E-Resik
     const pelangganData = {
       nama,
       noHp,

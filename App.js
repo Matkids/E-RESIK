@@ -1,27 +1,26 @@
 import React from "react";
-import { NativeBaseProvider, Text } from "native-base";
+import {
+  NativeBaseProvider,
+  extendTheme,
+  Text
+
+} from "native-base";
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Native']);
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import Profile from "./screens/Profile";
 import Home from "./screens/Home";
 import LoginScreen from "./screens/LoginScreen";
 import CreateOrder from "./screens/CreateOrder";
 import ConfirmationOrder from "./screens/ConfirmationOrder";
-import ProfileUser from "./screens/Profile";
 import Invoice from "./screens/Invoice";
-import Riwayat from "./screens/riwayat";
-import RincianPesanan from "./screens/rincian_pesanan";
-import Informasi from "./screens/informasi";
-import ListPendapatan from "./screens/ListPendapatan";
-import DetailPendapatan from "./screens/DetailPendapatan";
-import TambahPendapatan from "./screens/TambahPendapatan";
-import ListCustomer from "./screens/ListCustomer";
-import CreateCustomer from "./screens/CreateCustomer";
-import Customer from "./screens/Customer";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
 
 const noHead = { headerShown: false };
 
@@ -32,35 +31,30 @@ const Tabs = () => {
         tabBarIcon: ({ focused, color }) => {
           let iconName;
           switch (route.name) {
-            case "Home":
+            case "Beranda":
               iconName = "home-outline";
               break;
-            case "Finance":
-              iconName = "cash-outline";
+            case "Pelanggan":
+              iconName = "people-outline";
               break;
             case "Order":
-              iconName =  "cart-outline";
+              iconName = "cart-outline";
               break;
-            case "Customer":
-                iconName = "people-outline";
-                break;
-            case "History":
+            case "Riwayat":
               iconName = "time-outline";
               break;
             case "Information":
               iconName = "information-outline";
               break;
             case "Profile":
-            iconName = "person-circle-outline";
-            break;
-
-  
+              iconName = "person-circle-outline";
+              break;
           }
           return (
             <Ionicons
               name={iconName}
               size={28}
-              color={focused ? "#1a91ff" : color}
+              color={focused ? "black" : color}
             />
           );
         },
@@ -71,49 +65,44 @@ const Tabs = () => {
         },
         tabBarLabel: ({ children, color, focused }) => {
           return (
-            <Text color={focused ? "#1a91ff" : color} mb={2} fontSize={10}>
+            <Text color={focused ? "#1a91ff" : color} mb={2}>
               {children}
             </Text>
           );
         },
       })}
     >
-      <Tab.Screen name="Home" component={Home} options={noHead} />
-      <Tab.Screen name="Finance" component={ListPendapatan} options={noHead} />
+      <Tab.Screen name="Beranda" component={Home} options={noHead} />
+      <Tab.Screen name="Pelanggan" component={Home} options={noHead} />
       <Tab.Screen name="Order" component={CreateOrder} options={noHead} />
-      <Tab.Screen name="Customer" component={Customer} options={noHead} />
-      <Tab.Screen name="Information" component={Informasi} options={noHead} />
-      <Tab.Screen name="Profile" component={ProfileUser} options={noHead} />
-
+      <Tab.Screen name="Riwayat" component={Home} options={noHead} />
+      <Tab.Screen name="Profile" component={Profile} options={noHead} />
     </Tab.Navigator>
   );
 };
 
-const App = () => {
-return (
-  <NativeBaseProvider>
-    <NavigationContainer>
-    <Stack.Navigator>
-      <Stack.Screen name="LoginScreen" component={LoginScreen} options={noHead} />
-      <Stack.Screen name="Home" component={Tabs} options={noHead} />
-      <Stack.Screen name="ProfileUser" component={ProfileUser} options={noHead} />
-      <Stack.Screen name="CreateOrder" component={Tabs} options={noHead} />
-      <Stack.Screen name="Confirmation" component={ConfirmationOrder} options={noHead} />
-      <Stack.Screen name="Invoice" component={Invoice} options={noHead} />
-      <Stack.Screen name="Riwayat" component={Riwayat} options={noHead}/>
-      <Stack.Screen name="rincian" component={RincianPesanan} options={noHead}/>
-      <Stack.Screen name="informasi" component={Informasi} options={noHead}/>
-      <Stack.Screen name="ListPendapatan" component={Tabs} options={noHead} />
-      <Stack.Screen name="DetailPendapatan" component={DetailPendapatan} options={noHead} />
-      <Stack.Screen name="TambahPendapatan" component={TambahPendapatan} options={noHead} />
-      <Stack.Screen name="Customer" component={Customer} options={noHead} />
-      <Stack.Screen name="ListCustomer" component={ListCustomer} options={noHead} />
-      <Stack.Screen name="CreateCustomer" component={CreateCustomer} options={noHead} />
+// Define the config
+const config = {
+  useSystemColorMode: false,
+  initialColorMode: "dark",
+};
 
-    </Stack.Navigator>
-  </NavigationContainer>
-  </NativeBaseProvider>
-);
+// extend the theme
+export const theme = extendTheme({ config });
+const App = () => {
+  return (
+    <NativeBaseProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={Tabs} options={noHead} />
+          <Stack.Screen name="LoginScreen" component={LoginScreen} options={noHead} />
+          <Stack.Screen name="CreateOrder" component={CreateOrder} options={noHead} />
+          <Stack.Screen name="Confirmation" component={ConfirmationOrder} options={noHead} />
+          <Stack.Screen name="Invoice" component={Invoice} options={noHead} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </NativeBaseProvider>
+  );
 }
 
 export default App;

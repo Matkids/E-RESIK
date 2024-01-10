@@ -1,5 +1,4 @@
 import React from "react";
-
 import { NativeBaseProvider, Text } from "native-base";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -8,19 +7,22 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import Beranda from "./screens/Beranda";
 import Masuk from "./screens/Masuk";
 import BuatPesanan from "./screens/BuatPesanan";
-// import KonfirmasiPesanan from "./screens/KonfirmasiPesanan";
-
-// import Tagihan from "./screens/Tagihan";
+import KonfirmasiPesanan from "./screens/KonfirmasiPesanan";
+import Tagihan from "./screens/Tagihan";
 import Riwayat from "./screens/Riwayat";
-import RincianPesanan from "./screens/RincianPesanan"
+import RincianPesanan from "./screens/RincianPesanan";
 import Layanan from "./screens/Layanan";
-// import Pendapatan from "./screens/Pendapatan";
-// import DetailPendapatan from "./screens/DetailPendapatan";
-// import TambahPendapatan from "./screens/TambahPendapatan";
-// import ListPelanggan from "./screens/ListPelanggan";
+import CatatanSelesai from "./screens/CatatanSelesai";
+import Pendapatan from "./screens/Pendapatan";
+import DetailPendapatan from "./screens/DetailPendapatan";
+import TambahPendapatan from "./screens/TambahPendapatan";
+import ListPelanggan from "./screens/ListPelanggan";
 import Profil from "./screens/Profil";
-// import Tips from "./screens/Tips";
-// import BuatPelanggan from "./screens/BuatPelanggan";
+import Cuaca from "./screens/Cuaca";
+import BuatPelanggan from "./screens/BuatPelanggan";
+import EditProfile from "./screens/EditProfile";
+import Splash from "./screens/splash";
+import Catatan from "./screens/Catatan";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -54,7 +56,10 @@ const Tabs = () => {
         },
         tabBarIconStyle: { marginTop: 5 },
         tabBarStyle: {
-          height: 70,
+          height: 90,
+          paddingTop: 5,
+          borderTopStartRadius: 30,
+          borderTopEndRadius: 30,
           borderTopWidth: 0,
         },
         tabBarLabel: ({ children, color, focused }) => {
@@ -85,21 +90,27 @@ const App = () => {
           <Stack.Screen name="Masuk" component={Masuk} options={noHead} />
           <Stack.Screen name="Beranda" component={Tabs} options={noHead} />
           <Stack.Screen name="Profil" component={Tabs} options={noHead} />
-          {/* <Stack.Screen name="BuatPesanan" component={Tabs} options={noHead} />
+          <Stack.Screen name="BuatPesanan" component={Tabs} options={noHead} />
           <Stack.Screen
             name="KonfirmasiPesanan"
             component={KonfirmasiPesanan}
             options={noHead}
           />
-          <Stack.Screen name="Tagihan" component={Tagihan} options={noHead} /> */}
+          <Stack.Screen name="Tagihan" component={Tagihan} options={noHead} />
           <Stack.Screen name="Riwayat" component={Riwayat} options={noHead} />
           <Stack.Screen
             name="RincianPesanan"
             component={RincianPesanan}
             options={noHead}
           />
+          <Stack.Screen name="Catatan" component={Catatan} options={noHead} />
+          <Stack.Screen
+            name="CatatanSelesai"
+            component={CatatanSelesai}
+            options={noHead}
+          />
           <Stack.Screen name="Layanan" component={Layanan} options={noHead} />
-          {/* <Stack.Screen
+          <Stack.Screen
             name="Pendapatan"
             component={Pendapatan}
             options={noHead}
@@ -114,7 +125,7 @@ const App = () => {
             component={TambahPendapatan}
             options={noHead}
           />
-          <Stack.Screen name="Tips" component={Tips} options={noHead} />
+          <Stack.Screen name="Cuaca" component={Cuaca} options={noHead} />
           <Stack.Screen
             name="ListPelanggan"
             component={ListPelanggan}
@@ -124,7 +135,14 @@ const App = () => {
             name="BuatPelanggan"
             component={BuatPelanggan}
             options={noHead}
-          /> */}
+          />
+          <Stack.Screen name="Splash" component={Splash} options={noHead} />
+
+          <Stack.Screen
+            name="EditProfile"
+            component={EditProfile}
+            options={noHead}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>

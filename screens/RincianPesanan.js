@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import {
   Image,
   Divider,
@@ -8,18 +9,39 @@ import {
   Box,
   Container,
 } from "native-base";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { SafeAreaView, TouchableOpacity } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Header } from "../components";
 import { useNavigation } from "@react-navigation/native";
-import { Header } from "../component";
-const RincianPesanan = () => {
+import { getDatabase, ref, onValue } from "firebase/database";
+
+const RincianPesanan = ({ route }) => {
+  const { pesananId } = route.params;
+  const [dataPesanan, setDataPesanan] = useState(null);
   const navigation = useNavigation();
+
+  // Menggunakan useEffect untuk melakukan fetch data ketika komponen di-mount
+  useEffect(() => {
+    // Gantilah "NamaPesanan" dengan referensi yang sesuai di Firebase
+    const pesananRef = ref(getDatabase(), `Pesanan/${pesananId}`);
+
+    // Menggunakan onValue untuk mendapatkan data secara real-time
+    onValue(pesananRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        setDataPesanan(data);
+      }
+    });
+  }, [pesananId]);
+
   return (
     <>
+      {/* Menggunakan komponen Header untuk judul halaman */}
       <Header title={"Rincian Pesanan"} withBack="true" />
-      <SafeAreaView flex={1}>
-        <ScrollView flex={1}>
-          <VStack px={5} pt={6}>
+      {/* ScrollView untuk menggulirkan konten jika lebih panjang dari layar */}
+      <ScrollView flex={1}>
+        {/* VStack untuk menumpuk elemen-elemen secara vertikal */}
+        <VStack px={5} pt={6}>
+          {dataPesanan && (
             <Box
               bg={"#FFFF"}
               rounded="xl"
@@ -34,40 +56,51 @@ const RincianPesanan = () => {
               pl={4}
               mb={3}
             >
+              {/* Box untuk memberi margin dan padding */}
               <Box ml={2} m={2}>
-                <Text bold>Anggi Aulia</Text>
+                {/* Text bold untuk menampilkan teks dengan tebal */}
+                <Text bold>{dataPesanan.nama}</Text>
               </Box>
+              {/* Divider untuk membuat garis pemisah */}
               <Divider />
+
+              {/* HStack untuk menyusun elemen secara horizontal */}
               <HStack px={2} py={2}>
+                {/* Image untuk menampilkan gambar dengan berbagai properti */}
                 <Image
-                  source={{
-                    uri: "https://i.pinimg.com/564x/69/b8/0d/69b80d27d5c899b43c861e06ff53c619.jpg",
-                  }}
+                  source={require("../assets/icon.png")}
                   alt="Alternate Text"
                   size="md"
                   pt={2}
                   rounded={10}
                 />
+                {/* Container untuk memberikan padding dan margin */}
                 <Container pl={2} pb={2}>
+                  {/* Box untuk memberi margin dan padding */}
                   <Box>
-                    <Text color={"#000000"}>ID Pesanan: P001</Text>
+                    {/* Text untuk menampilkan teks dengan berbagai properti */}
+                    <Text color={"#000000"}>ID Pesanan: {pesananId}</Text>
                     <Text color={"#000000"}>
-                      Tanggal Pesanan: 2 November 2023
+                      Tanggal Pesanan: {dataPesanan.tanggal}
                     </Text>
-                    <Text color={"#000000"}>Jenis: Laundry Express</Text>
-                    <Text color={"#000000"}>Jumlah Cucian: 15 Kg</Text>
+                    <Text color={"#000000"}>Jenis: {dataPesanan.layanan}</Text>
                     <Text color={"#000000"}>
-                      Detail Barang: 10 Kaos, 3 Flannel, 5 Jaket, 5 kaos Kaki
+                      Jumlah Cucian: {dataPesanan.berat} Kg
                     </Text>
-                    <Text color={"#000000"}>Harga Per Kg: Rp 16.000</Text>
-                    <Text color={"#000000"}>Total Harga: Rp 240.000</Text>
+                    <Text color={"#000000"}>No Hp: {dataPesanan.noHp}</Text>
+                    <Text color={"#000000"}>
+                      Keterangan: {dataPesanan.keterangan}
+                    </Text>
+                    <Text color={"#000000"}>
+                      Total Harga: {dataPesanan.Harga}
+                    </Text>
                   </Box>
                 </Container>
               </HStack>
             </Box>
-          </VStack>
-        </ScrollView>
-      </SafeAreaView>
+          )}
+        </VStack>
+      </ScrollView>
     </>
   );
 };

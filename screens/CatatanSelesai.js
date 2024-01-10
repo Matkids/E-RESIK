@@ -54,6 +54,7 @@ const CatatanSelesai = () => {
               color="primary.600"
               mb={2}
             />
+            <Icon as={AntDesign} name="frowno" size={82} color="primary.600" mb={2} />
             <Text fontSize={16} bold={true}>
               tidak ada yang selesai
             </Text>

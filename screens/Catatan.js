@@ -6,6 +6,7 @@ import {
   IconButton,
   Icon,
   Text,
+  Center,
   Toast,
   ScrollView,
   Button,
@@ -104,7 +105,6 @@ const Catatan = () => {
               </Text>
             </Button>
           </Box>
-
           <Box mt="15px" mx="15px" mb="7.5px">
             <HStack space="15px">
               <Input
@@ -149,6 +149,20 @@ const Catatan = () => {
               ))}
             </Box>
           </ScrollView>
+          <Center>
+            <HStack>
+              <Box>
+                <Button
+                  bg={"#0878CA"}
+                  size="sm"
+                  borderRadius={"lg"}
+                  onPress={() => navigation.replace("CatatanSelesai")}
+                >
+                  Selesai
+                </Button>
+              </Box>
+            </HStack>
+          </Center>
         </Box>
       </ScrollView>
     </>

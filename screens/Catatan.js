@@ -5,6 +5,7 @@ import {
   Input,
   IconButton,
   Icon,
+  Text,
   Center,
   Toast,
   ScrollView,
@@ -19,7 +20,7 @@ import {
   getNote,
   editNote,
   deleteNote,
-} from "../src/actions/AuthAction"; 
+} from "../src/actions/AuthAction";
 
 const Catatan = () => {
   const [list, setList] = useState([]);
@@ -91,6 +92,19 @@ const Catatan = () => {
       <Header title={"Catatan"} withBack="true" />
       <ScrollView>
         <Box mt={2}>
+          <Box mx={4}>
+            <Button
+              bg={"#0878CA"}
+              size="sm"
+              py={3}
+              borderRadius={"lg"}
+              onPress={() => navigation.replace("CatatanSelesai")}
+            >
+              <Text color={"#FFFF"} bold>
+                Selesai
+              </Text>
+            </Button>
+          </Box>
           <Box mt="15px" mx="15px" mb="7.5px">
             <HStack space="15px">
               <Input
@@ -123,8 +137,12 @@ const Catatan = () => {
                     data={item}
                     index={index}
                     deletedIcon={true}
-                    onItemPress={() => handleStatusChange(item.noteId, !item.isCompleted)}
-                    onChecked={() => handleStatusChange(item.noteId, !item.isCompleted)}
+                    onItemPress={() =>
+                      handleStatusChange(item.noteId, !item.isCompleted)
+                    }
+                    onChecked={() =>
+                      handleStatusChange(item.noteId, !item.isCompleted)
+                    }
                     onDeleted={() => handleDeleteTask(item.noteId)}
                   />
                 </Box>

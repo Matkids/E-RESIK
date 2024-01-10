@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Button, Box, Stack, Input, Icon, Center } from "native-base";
+import {
+  Button,
+  Box,
+  Stack,
+  Input,
+  Icon,
+  Center,
+  ScrollView,
+} from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
@@ -47,12 +55,13 @@ const TambahPendapatan = () => {
   return (
     <>
       <Header title={"Tambah Pendapatan"} withBack="true" />
-      <Center flex={1} bg="#EAEAEA">
+      <ScrollView>
         <SafeAreaView>
           <Box
             mx="auto"
             p="10"
-            bg="muted.100"
+            py={7}
+            bg="#FFFF"
             w="80"
             borderColor="#0878CA"
             borderWidth="2"
@@ -107,14 +116,14 @@ const TambahPendapatan = () => {
 
                 <Box alignItems="center">
                   <Button bg={"#0878CA"} rounded={"xl"} onPress={handleSubmit}>
-                    Submit
+                    Tambah
                   </Button>
                 </Box>
               </Stack>
             </Box>
           </Box>
         </SafeAreaView>
-      </Center>
+      </ScrollView>
     </>
   );
 };

@@ -21,7 +21,6 @@ const ModalSignUp = (props) => {
     const [alertMessage, setAlertMessage] = useState("");
     const [showFirstPw, setShowFirstPw] = useState(false);
 
-    //Modal Signup
     const onRegister = async () => {
         if (nama && email && password && alamat && kodepos) {
             const data = {

@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import {
   Image,
   Divider,
@@ -7,452 +8,220 @@ import {
   HStack,
   Button,
   Box,
-  FormControl,
   Modal,
-  Input,
+  Stack,
+  Container,
   Heading,
+  Center,
+  NativeBaseProvider,
 } from "native-base";
-
-import { TouchableOpacity } from "react-native";
+import { SafeAreaView, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { useState } from "react";
+import {
+  getDatabase,
+  ref,
+  onValue,
+  remove,
+  child,
+  update,
+} from "firebase/database";
 import { Header } from "../components";
-import Ionicons from "@expo/vector-icons/Ionicons";
 
-const data = [
-  {
-    id: 1,
-    tanggal: "02 November 2023",
-    jam: "09:00",
-    berat: "15 kg",
-    harga: "Rp 75.000",
-  },
-];
-
-const Riwayat = () => {
+const RiwayatPesanan = () => {
   const navigation = useNavigation();
+  const [riwayatPesanan, setRiwayatPesanan] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [selectedPesanan, setSelectedPesanan] = useState(null);
+
+  // Menggunakan useEffect untuk melakukan fetch data ketika komponen di-mount
+  useEffect(() => {
+    const pesananRef = ref(getDatabase(), "Pesanan");
+
+    // Menggunakan onValue untuk mendapatkan data secara real-time
+    onValue(pesananRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        // Mengubah objek pesanan menjadi array
+        const pesananArray = Object.entries(data).map(([key, value]) => ({
+          id: key,
+          ...value,
+        }));
+        setRiwayatPesanan(pesananArray);
+      }
+    });
+  }, []);
+
+  // Fungsi untuk menghapus pesanan
+  const handleDelete = () => {
+    if (!selectedPesanan) return;
+
+    const pesananRef = ref(getDatabase(), "Pesanan");
+    const pesananKey = selectedPesanan.id;
+
+    // Menghapus pesanan dari database
+    remove(child(pesananRef, pesananKey))
+      .then(() => {
+        console.log("Pesanan berhasil dihapus!");
+        setShowModal(false);
+        // Secara opsional, Anda dapat memperbarui state lokal untuk mencerminkan perubahan
+        setRiwayatPesanan((prevPesanan) =>
+          prevPesanan.filter((pesanan) => pesanan.id !== pesananKey)
+        );
+      })
+      .catch((error) => {
+        console.error("Gagal menghapus pesanan:", error);
+      });
+  };
+
+  // Fungsi untuk menampilkan modal
+  const handleShowModal = (pesanan) => {
+    setSelectedPesanan(pesanan);
+    setShowModal(true);
+  };
 
   return (
     <>
-      <Header title={"Riwayat"} />
-      <ScrollView>
-        <VStack px={4} my={2}>
-          <VStack>
-            <Box bg={"#1a91ff"} rounded="10" pt={2} pb={2} pl={4} my={4}>
-              <HStack justifyContent={"space-between"}>
-              <TouchableOpacity
-                    p={3}
-                    onPress={() => navigation.goBack("riwayat")}
+      <Header title={"Riwayat"} withBack="true" />
+      
+        <ScrollView>
+         
+          {/* Mencetak setiap pesanan dari array riwayatPesanan */}
+          {riwayatPesanan.map((pesanan) => (
+            <Box
+              key={pesanan.id}
+              mx={6}
+              
+              my={7}
+              rounded="xl"
+              overflow="hidden"
+              shadow={4}
+              borderColor="#0878CA"
+              borderWidth="1"
+              backgroundColor="#FFFF"
+            >
+              <Stack p="2" space={3}>
+                <Box>
+                  <HStack
+                    space={2}
+                    ml={2}
+                    justifyContent={"space-between"}
+                    alignItems={"center"}
                   >
-                    <Ionicons
-                      name="arrow-back-outline"
-                      size={30}
-                      color={"white"}
+                    {/* Text bold untuk menampilkan teks dengan tebal dan memanggil properti dari database nama */}
+                    <Text bold>{pesanan.nama}</Text>
+
+                    {/* TouchableOpacity dan Button untuk menampilkan tombol hapus */}
+                    <TouchableOpacity>
+                      <Button
+                        mx={4}
+                        mt={2}
+                        p={2}
+                        rounded="md"
+                        overflow="hidden"
+                        borderColor="#0878CA"
+                        borderWidth="1"
+                        backgroundColor="#0878CA"
+                        onPress={() => handleShowModal(pesanan)}
+                      >
+                        <Text
+                          color={"#FFFF"}
+                          fontSize={"sm"}
+                          bold
+                          onPress={() => handleShowModal(pesanan)}
+                        >
+                          Hapus
+                        </Text>
+                      </Button>
+                    </TouchableOpacity>
+                  </HStack>
+
+                  {/* Modal untuk konfirmasi penghapusan */}
+                  <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+                    <Modal.Content
+                      borderWidth={1}
+                      borderColor={"#0878CA"}
+                      maxWidth="400px"
+                    >
+                      <Box mx={2}>
+                        <Modal.CloseButton />
+                        <Modal.Header>Hapus Riwayat</Modal.Header>
+
+                        {/* Modal.Footer dan Button untuk tombol Hapus */}
+                        <Modal.Footer>
+                          <Button.Group space={2}>
+                            <Button
+                              bg={"#0878CA"}
+                              borderRadius={"xl"}
+                              onPress={handleDelete}
+                            >
+                              <Text color={"#FFFF"}>Hapus</Text>
+                            </Button>
+                          </Button.Group>
+                        </Modal.Footer>
+                      </Box>
+                    </Modal.Content>
+                  </Modal>
+                </Box>
+
+                <Box>
+                  <Divider />
+                  <HStack mx={4}>
+                    <Image
+                      source={require("../assets/icon.png")}
+                      alt="Alternate Text"
+                      size="md"
+                      borderColor={"#0878CA"}
+                      borderWidth={"1"}
+                      mt={4}
+                      mb={2}
+                      rounded={10}
                     />
-                  </TouchableOpacity>
-              <Text bold py={2} fontSize="xl" color={"#FFF"}>
-                  Laundry
-                </Text>
 
-                <Button
-                   mx={2}
-                   my={2}
-                   ml={20}
-                   mr={2} 
-                  rounded={10}
-                  bg={"#FFFf"}
-                  onPress={() => setShowModal(true)}
-                >
-                  <Text color={"#1a91ff"}>Hapus</Text>
-                </Button>
-                <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
-                  <Modal.Content maxWidth="400px">
-                    <Modal.CloseButton />
-                    <Modal.Header>Hapus Riwayat</Modal.Header>
-             
-                    <Modal.Footer>
-                      <Button.Group space={2}>
-                        <Button
-                          variant="ghost"
-                          colorScheme="blueGray"
-                          onPress={() => {
-                            setShowModal(false);
-                          }}
+                    <VStack mx={2}>
+                      <Box mt={2}>
+                        <Box p={3} mb={3}>
+                          {/* Text untuk menampilkan teks dengan berbagai properti */}
+                          <Text bold fontSize={16}>
+                            Tanggal: {pesanan.tanggal}
+                          </Text>
+                          <Text>Berat: {pesanan.berat}</Text>
+                          <Text>Harga: {pesanan.Harga}</Text>
+                        </Box>
+                      </Box>
+                    </VStack>
+                  </HStack>
+
+                  <HStack justifyContent={"flex-end"}>
+                    <Box>
+                      <Button
+                        p={2}
+                        mr={2}
+                        mb={2}
+                        rounded="md"
+                        overflow="hidden"
+                        borderColor="#0878CA"
+                        borderWidth="1"
+                        backgroundColor="#0878CA"
+                      >
+                        <TouchableOpacity
+                          onPress={() => navigation.navigate("RincianPesanan", { pesananId: pesanan.id })}
                         >
-                          Batal
-                        </Button>
-                        <Button bg={"#1a91ff"}
-                          onPress={() => {
-                            setShowModal(false);
-                          }}
-                        >
-                         <Text color={"#FFFF"}>Hapus</Text>
-                        </Button>
-                      </Button.Group>
-                    </Modal.Footer>
-                  </Modal.Content>
-                </Modal>
-              </HStack>
-              <Divider />
-              <HStack pt={2}>
-                <Image
-                  source={{
-                    uri: "https://i.pinimg.com/564x/69/b8/0d/69b80d27d5c899b43c861e06ff53c619.jpg",
-                  }}
-                  alt="Alternate Text"
-                  size="md"
-                  mt={4}
-                  mb={2}
-                  rounded={10}
-                />
-                <HStack>
-                  {data.map((item) => (
-                    <Box key={item.id} p={3} mb={3}>
-                      <Text bold fontSize={16}>
-                        Tanggal: {item.tanggal}
-                      </Text>
-                      <Text>Jam: {item.jam}</Text>
-                      <Text>Berat: {item.berat}</Text>
-                      <Text>Harga: {item.harga}</Text>
+                          <Text bold color={"#FFFF"}>
+                            Rincian Pesanan
+                          </Text>
+                        </TouchableOpacity>
+                      </Button>
                     </Box>
-                  ))}
-                </HStack>
-              </HStack>
-              <Divider mb={2} />
-              <HStack justifyContent={"flex-end"}>
-                <TouchableOpacity>
-                  <Button
-                    onPress={() => navigation.navigate("rincian")}
-                    px={2}
-                    mx={1}
-                    my={2}
-                    rounded={10}
-                    bg={"#FFF"}
-                  >
-                    <Text bold color={"#1a91ff"}>
-                      Rincian Pesanan
-                    </Text>
-                  </Button>
-                </TouchableOpacity>
-                <Button px={2} mr={4} mx={1} my={2} rounded={10} bg={"#FFF"}>
-                  <Text color={"green.500"}>Telah Selesai</Text>
-                </Button>
-              </HStack>
+                  </HStack>
+                </Box>
+              </Stack>
             </Box>
-
-            <Box bg={"#1a91ff"} rounded="10" pt={2} pr={4} pb={2} pl={4}>
-            <HStack justifyContent={"space-between"}>
-            <TouchableOpacity
-                    p={3}
-                    onPress={() => navigation.goBack("riwayat")}
-                  >
-                    <Ionicons
-                      name="arrow-back-outline"
-                      size={30}
-                      color={"white"}
-                    />
-                  </TouchableOpacity>
-              <Text bold py={2} fontSize="xl" color={"#FFF"}>
-                  Laundry
-                </Text>
-
-                <Button
-                   mx={2}
-                   my={2}
-                   ml={24}
-                   mr={2} 
-                  rounded={10}
-                  bg={"#FFFf"}
-                  onPress={() => setShowModal(true)}
-                >
-                  <Text color={"#1a91ff"}>Hapus</Text>
-                </Button>
-                <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
-                  <Modal.Content maxWidth="400px">
-                    <Modal.CloseButton />
-                    <Modal.Header>Hapus Riwayat</Modal.Header>
-             
-                    <Modal.Footer>
-                      <Button.Group space={2}>
-                        <Button
-                          variant="ghost"
-                          colorScheme="blueGray"
-                          onPress={() => {
-                            setShowModal(false);
-                          }}
-                        >
-                          Batal
-                        </Button>
-                        <Button bg={"#1a91ff"}
-                          onPress={() => {
-                            setShowModal(false);
-                          }}
-                        >
-                          <Text color={"#FFF"}>Hapus</Text>
-                        </Button>
-                      </Button.Group>
-                    </Modal.Footer>
-                  </Modal.Content>
-                </Modal>
-              </HStack>
-              <Divider />
-              <HStack pt={2}>
-                <Image
-                  source={{
-                    uri: "https://i.pinimg.com/564x/69/b8/0d/69b80d27d5c899b43c861e06ff53c619.jpg",
-                  }}
-                  alt="Alternate Text"
-                  size="md"
-                  mt={4}
-                  mb={2}
-                  rounded={10}
-                />
-                <HStack>
-                  {data.map((item) => (
-                    <Box key={item.id} p={3} mb={3}>
-                      <Text bold fontSize={16}>
-                        Tanggal: {item.tanggal}
-                      </Text>
-                      <Text>Jam: {item.jam}</Text>
-                      <Text>Berat: {item.berat}</Text>
-                      <Text>Harga: {item.harga}</Text>
-                    </Box>
-                  ))}
-                </HStack>
-              </HStack>
-              <Divider mb={2} />
-              <HStack justifyContent={"flex-end"}>
-                <TouchableOpacity>
-                  <Button
-                    onPress={() => navigation.navigate("rincian")}
-                    px={2}
-                    mx={1}
-                    my={2}
-                    rounded={10}
-                    bg={"#FFF"}
-                  >
-                    <Text bold color={"#1a91ff"}>
-                      Rincian Pesanan
-                    </Text>
-                  </Button>
-                </TouchableOpacity>
-                <Button px={2} mx={1} my={2} rounded={10} bg={"#FFF"}>
-                  <Text color={"green.500"}>Telah Selesai</Text>
-                </Button>
-              </HStack>
-            </Box>
-
-            <Box bg={"#1a91ff"} rounded="10" pt={2} pr={4} pb={2} pl={4} mt={4}>
-            <HStack justifyContent={"space-between"}>
-            <TouchableOpacity
-                    p={3}
-                    onPress={() => navigation.goBack("riwayat")}
-                  >
-                    <Ionicons
-                      name="arrow-back-outline"
-                      size={30}
-                      color={"white"}
-                    />
-                  </TouchableOpacity>
-              <Text bold py={2} fontSize="xl" color={"#FFF"}>
-                  Laundry
-                </Text>
-
-                <Button
-                   mx={2}
-                   my={2}
-                   ml={24}
-                   mr={2} 
-                  rounded={10}
-                  bg={"#FFFf"}
-                  onPress={() => setShowModal(true)}
-                >
-                  <Text color={"#1a91ff"}>Hapus</Text>
-                </Button>
-                <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
-                  <Modal.Content maxWidth="400px">
-                    <Modal.CloseButton />
-                    <Modal.Header>Hapus Riwayat</Modal.Header>
-             
-                    <Modal.Footer>
-                      <Button.Group space={2}>
-                        <Button
-                          variant="ghost"
-                          colorScheme="blueGray"
-                          onPress={() => {
-                            setShowModal(false);
-                          }}
-                        >
-                          Batal
-                        </Button>
-                        <Button bg={"#1a91ff"}
-                          onPress={() => {
-                            setShowModal(false);
-                          }}
-                        >
-                          <Text color={"#FFF"}>Hapus</Text>
-                        </Button>
-                      </Button.Group>
-                    </Modal.Footer>
-                  </Modal.Content>
-                </Modal>
-              </HStack>
-              <Divider />
-              <HStack pt={2}>
-                <Image
-                  source={{
-                    uri: "https://i.pinimg.com/564x/69/b8/0d/69b80d27d5c899b43c861e06ff53c619.jpg",
-                  }}
-                  alt="Alternate Text"
-                  size="md"
-                  mt={4}
-                  mb={2}
-                  rounded={10}
-                />
-                <HStack>
-                  {data.map((item) => (
-                    <Box key={item.id} p={3} mb={3}>
-                      <Text bold fontSize={16}>
-                        Tanggal: {item.tanggal}
-                      </Text>
-                      <Text>Jam: {item.jam}</Text>
-                      <Text>Berat: {item.berat}</Text>
-                      <Text>Harga: {item.harga}</Text>
-                    </Box>
-                  ))}
-                </HStack>
-              </HStack>
-              <Divider mb={2} />
-              <HStack justifyContent={"flex-end"}>
-                <TouchableOpacity>
-                  <Button
-                    onPress={() => navigation.navigate("rincian")}
-                    px={2}
-                    mx={1}
-                    my={2}
-                    rounded={10}
-                    bg={"#FFF"}
-                  >
-                    <Text bold color={"#1a91ff"}>
-                      Rincian Pesanan
-                    </Text>
-                  </Button>
-                </TouchableOpacity>
-                <Button px={2} mx={1} my={2} rounded={10} bg={"#FFF"}>
-                  <Text color={"green.500"}>Telah Selesai</Text>
-                </Button>
-              </HStack>
-            </Box>
-
-            <Box bg={"#1a91ff"} rounded="10" pt={2} pr={4} pb={2} pl={4} mt={4}>
-            <HStack justifyContent={"space-between"}>
-            <TouchableOpacity
-                    p={3}
-                    onPress={() => navigation.goBack("riwayat")}
-                  >
-                    <Ionicons
-                      name="arrow-back-outline"
-                      size={30}
-                      color={"white"}
-                    />
-                  </TouchableOpacity>
-              <Text bold py={2} fontSize="xl" color={"#FFF"}>
-                  Laundry
-                </Text>
-                
-
-                <Button
-                   mx={2}
-                   my={2}
-                   ml={24}
-                   mr={2} 
-                  rounded={10}
-                  bg={"#FFFf"}
-                  onPress={() => setShowModal(true)}
-                >
-                  <Text color={"#1a91ff"}>Hapus</Text>
-                </Button>
-                <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
-                  <Modal.Content maxWidth="400px">
-                    <Modal.CloseButton />
-                    <Modal.Header>Hapus Riwayat</Modal.Header>
-             
-                    <Modal.Footer>
-                      <Button.Group space={2}>
-                        <Button
-                          variant="ghost"
-                          colorScheme="blueGray"
-                          onPress={() => {
-                            setShowModal(false);
-                          }}
-                        >
-                          Batal
-                        </Button>
-                        <Button bg={"#1a91ff"}
-                          onPress={() => {
-                            setShowModal(false);
-                          }}
-                        >
-                          <Text color={"#FFF"}>Hapus</Text>
-                        </Button>
-                      </Button.Group>
-                    </Modal.Footer>
-                  </Modal.Content>
-                </Modal>
-              </HStack>
-
-              <Divider />
-              <HStack pt={2}>
-                <Image
-                  source={{
-                    uri: "https://i.pinimg.com/564x/69/b8/0d/69b80d27d5c899b43c861e06ff53c619.jpg",
-                  }}
-                  alt="Alternate Text"
-                  size="md"
-                  mt={4}
-                  mb={2}
-                  rounded={10}
-                />
-                <HStack>
-                  {data.map((item) => (
-                    <Box key={item.id} p={3} mb={3}>
-                      <Text bold fontSize={16}>
-                        Tanggal: {item.tanggal}
-                      </Text>
-                      <Text>Jam: {item.jam}</Text>
-                      <Text>Berat: {item.berat}</Text>
-                      <Text>Harga: {item.harga}</Text>
-                    </Box>
-                  ))}
-                </HStack>
-              </HStack>
-              <Divider mb={2} />
-              <HStack justifyContent={"flex-end"}>
-                <TouchableOpacity>
-                  <Button
-                    onPress={() => navigation.navigate("rincian")}
-                    px={2}
-                    mx={1}
-                    my={2}
-                    rounded={10}
-                    bg={"#FFF"}
-                  >
-                    <Text bold color={"#1a91ff"}>
-                      Rincian Pesanan
-                    </Text>
-                  </Button>
-                </TouchableOpacity>
-                <Button px={2} mx={1} my={2} rounded={10} bg={"#FFF"}>
-                  <Text color={"green.500"}>Telah Selesai</Text>
-                </Button>
-              </HStack>
-            </Box>
-          </VStack>
-        </VStack>
-      </ScrollView>
+          ))}
+        
+        </ScrollView>
+      
     </>
   );
 };
 
-export default Riwayat;
+export default RiwayatPesanan;

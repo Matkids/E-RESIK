@@ -2,7 +2,6 @@ import { Alert } from "react-native";
 import FIREBASE from "../config/FIREBASE";
 import { clearStorage, getData, storeData } from "../utils/localStorage";
 
-//Auth
 export const registerUser = async (data, password) => {
   try {
     const success = await FIREBASE.auth().createUserWithEmailAndPassword(data.email, password);

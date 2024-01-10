@@ -3,7 +3,6 @@ import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import "firebase/compat/database";
 
-//index
 firebase.initializeApp({
     apiKey: "AIzaSyCa7qM9eq1MpK3mpAgw7TaGaS-kh221Q9Q",
     authDomain: "e-resik.firebaseapp.com",

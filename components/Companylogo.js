@@ -1,7 +1,6 @@
 import React from 'react'
 import { Image, Box } from 'native-base';
 
-//companylogo
 const Companylogo = () => {
     return (
     <Box>

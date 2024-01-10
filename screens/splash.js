@@ -1,6 +1,6 @@
-import { StyleSheet, View } from 'react-native'
-import React, { Component } from 'react'
-import { getData } from '../src/utils/localStorage';
+import { StyleSheet, View } from "react-native";
+import React, { Component } from "react";
+import { getData } from "../src/utils/localStorage";
 
 export default class Splash extends Component {
   // Lifecycle method componentDidMount dijalankan setelah komponen dirender pertama kali
@@ -13,20 +13,17 @@ export default class Splash extends Component {
       // Memeriksa apakah ada data pengguna
       if (userData) {
         // Jika ada, arahkan pengguna ke layar beranda (Home)
-        this.props.navigation.replace('Home');
+        this.props.navigation.replace("Home");
       } else {
         // Jika tidak ada, arahkan pengguna ke layar masuk (LoginScreen)
-        this.props.navigation.navigate('LoginScreen');
+        this.props.navigation.navigate("LoginScreen");
       }
     }, 3000); // Waktu penundaan selama 3000 milidetik (3 detik)
   }
 
   render() {
     // Tampilan SplashScreen hanya berisi View kosong untuk memastikan tampilan penuh
-    return (
-      <View style={styles.pages}>
-      </View>
-    )
+    return <View style={styles.pages}></View>;
   }
 }
 
@@ -34,7 +31,7 @@ export default class Splash extends Component {
 const styles = StyleSheet.create({
   pages: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });

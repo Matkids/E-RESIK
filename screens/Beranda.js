@@ -15,15 +15,14 @@ import {
   HStack,
   VStack,
   Button,
-  Icon
+  Icon,
 } from "native-base";
 import { Foundation } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Ionicons } from '@expo/vector-icons';
-
+import { Ionicons } from "@expo/vector-icons";
 
 const Beranda = () => {
   const navigation = useNavigation();
@@ -51,9 +50,14 @@ const Beranda = () => {
               <Stack p="4" space={3}>
                 <HStack space={2}>
                   <HStack space={2} alignItems="center">
-                  <Icon as={Ionicons} name="person-circle-outline" size={50} color="black" />
+                    <Icon
+                      as={Ionicons}
+                      name="person-circle-outline"
+                      size={50}
+                      color="black"
+                    />
 
-                    <Text fontSize={"md"}>Admin</Text>
+                    <Text fontSize={"md"}>E-Resik</Text>
                   </HStack>
                 </HStack>
               </Stack>
@@ -200,16 +204,12 @@ const Beranda = () => {
                   >
                     <TouchableOpacity
                       p={3}
-                      onPress={() => navigation.navigate("Tips")}
+                      onPress={() => navigation.navigate("Cuaca")}
                     >
-                      <MaterialCommunityIcons
-                        name="lightbulb-multiple-outline"
-                        size={60}
-                        color="white"
-                      />
+                      <Fontisto name="cloudy" size={55} color="#FFFF" />
                     </TouchableOpacity>
                   </Button>
-                  <Text textAlign={"center"}>Tips</Text>
+                  <Text textAlign={"center"}>Cuaca</Text>
                 </Box>
               </Stack>
             </VStack>
